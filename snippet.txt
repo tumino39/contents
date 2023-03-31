@@ -1,0 +1,360 @@
+{
+    "report": {
+        "prefix": "report",
+        "body": [
+            "\\documentclass{jsarticle}",
+            "\\usepackage{amsmath,amsfonts,amssymb}",
+            "\\usepackage{bm}",
+            "\\usepackage{enumerate}",
+            "\\usepackage{breqn}",
+            "\\usepackage{amsthm}",
+            "\\theoremstyle{definition}",
+            "%\\newtheorem{Ex}{演習問題}",
+            "%\\newtheorem*{Ex*}{演習問題}",
+            "\\usepackage{latexsym}",
+            "\\usepackage{emathEy}",
+            "\\def\\qed{\\hfill$\\Box$}",
+            "\\pagestyle{myheadings}",
+            "\\pagestyle{myheadings}",
+            "%画像",
+            "\\usepackage[dvipdfmx]{graphicx}",
+            "\\title{レポート}",
+            "\\date{}",
+            "\\author{201910790\\quad 海野　哲也}",
+            "\\begin{document}",
+            "\\markright{201910790 海野　哲也}",
+            "\\maketitle",
+            "\\large",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\\end{document}"
+        ],
+        "description":"授業レポート用テンプレート"
+    },
+    "paper":{
+        "prefix": "paper",
+        "body": [
+            "\\documentclass[a4j,11pt]{article}",
+            "%\\usepackage[]{graphicx,float,latexsym,times}",
+            "%\\usepackage{amsfonts,amstext,amsmath,amssymb,amsthm}",
+            "%\\usepackage{caption2}",
+            "",
+            "",
+            "%***",
+            "%\\usepackage{array,epsfig,fancyheadings,rotating}",
+            "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+            "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+            "",
+            "",
+            "",
+            "\\usepackage{amsmath}",
+            "\\usepackage{amssymb}",
+            "\\usepackage{amsfonts}",
+            "\\usepackage{amsthm}",
+            "\\usepackage{color}",
+            "\\usepackage{comment}",
+            "\\usepackage{enumerate}",
+            "\\usepackage[dvipdfmx]{graphicx}",
+            "\\usepackage[subrefformat=parens]{subcaption}",
+            "\\usepackage[sectionbib]{natbib}",
+            "",
+            "\\bibliographystyle{plain}",
+            "",
+            "",
+            "\\long\\def\\symbolfootnote[#1]#2{\\begingroup%",
+            "\\def\\thefootnote{\\fnsymbol{footnote}}\\footnote[#1]{#2}\\endgroup}",
+            "%%%%%%%margins%%%%%%%",
+            "\\setlength{\\topmargin}{25mm}",
+            "\\addtolength{\\topmargin}{-1in}",
+            "\\setlength{\\textwidth}{170mm}",
+            "\\setlength{\\textheight}{235mm}",
+            "\\setlength{\\oddsidemargin}{20mm}",
+            "\\addtolength{\\oddsidemargin}{-1in}",
+            "\\setlength{\\evensidemargin}{20mm}",
+            "\\addtolength{\\evensidemargin}{-1in}",
+            "\\setlength{\\headsep}{0mm}",
+            "\\setlength{\\headheight}{0mm}",
+            "\\setlength{\\topskip}{0mm}",
+            "%\\setlength{\\footskip}{1.5cm}",
+            "%%%%%%%%%%%%%%%%%%%%%%%%",
+            "\\headheight=0mm\\headsep=0mm",
+            "",
+            "\\newcommand{\\Var}{\\mbox{Var}}",
+            "\\newcommand{\\ba}{\\mbox{\\boldmath{$a$}}}",
+            "\\newcommand{\\bA}{\\mbox{\\boldmath{$A$}}}",
+            "\\newcommand{\\bb}{\\mbox{\\boldmath{$b$}}}",
+            "\\newcommand{\\bB}{\\mbox{\\boldmath{$B$}}}",
+            "\\newcommand{\\bc}{\\mbox{\\boldmath{$c$}}}",
+            "\\newcommand{\\bC}{\\mbox{\\boldmath{$C$}}}",
+            "%\\newcommand{\\bsC}{\\boldsymbol{C}}",
+            "\\newcommand{\\bd}{\\mbox{\\boldmath{$d$}}}",
+            "\\newcommand{\\bD}{\\mbox{\\boldmath{$D$}}}",
+            "\\newcommand{\\be}{\\mbox{\\boldmath{$e$}}}",
+            "\\newcommand{\\bE}{\\mbox{\\boldmath{$E$}}}",
+            "\\newcommand{\\bff}{\\mbox{\\boldmath{$f$}}}",
+            "\\newcommand{\\bF}{\\mbox{\\boldmath{$F$}}}",
+            "\\newcommand{\\bg}{\\mbox{\\boldmath{$g$}}}",
+            "\\newcommand{\\bG}{\\mbox{\\boldmath{$G$}}}",
+            "\\newcommand{\\bh}{\\mbox{\\boldmath{$h$}}}",
+            "\\newcommand{\\bH}{\\mbox{\\boldmath{$H$}}}",
+            "\\newcommand{\\bi}{\\mbox{\\boldmath{$i$}}}",
+            "\\newcommand{\\bI}{\\mbox{\\boldmath{$I$}}}",
+            "\\newcommand{\\bj}{\\mbox{\\boldmath{$j$}}}",
+            "\\newcommand{\\bJ}{\\mbox{\\boldmath{$J$}}}",
+            "\\newcommand{\\bkk}{\\mbox{\\boldmath{$k$}}}",
+            "\\newcommand{\\bpsi}{\\mbox{\\boldmath{$\\psi$}}}",
+            "\\newcommand{\\bK}{\\mbox{\\boldmath{$K$}}}",
+            "\\newcommand{\\bl}{\\mbox{\\boldmath{$l$}}}",
+            "\\newcommand{\\bell}{\\mbox{\\boldmath$\\ell$}}",
+            "\\newcommand{\\bL}{\\mbox{\\boldmath{$L$}}}",
+            "\\newcommand{\\bm}{\\mbox{\\boldmath{$m$}}}",
+            "\\newcommand{\\bM}{\\mbox{\\boldmath{$M$}}}",
+            "\\newcommand{\\bn}{\\mbox{\\boldmath$n$}}",
+            "\\newcommand{\\bN}{\\mbox{\\boldmath$N$}}",
+            "\\newcommand{\\bsA}{\\mbox{\\scriptsize{\\bfA}}}",
+            "\\newcommand{\\bsB}{\\mbox{\\scriptsize{\\bfB}}}",
+            "\\newcommand{\\bsn}{\\mbox{\\scriptsize{\\bfn}}}",
+            "\\newcommand{\\bsN}{\\mbox{\\scriptsize{\\bfN}}}",
+            "\\newcommand{\\bsC}{\\mbox{\\scriptsize{\\bfC}}}",
+            "\\newcommand{\\bsSig}{\\mbox{\\scriptsize{\\bf$\\bSig$}}}",
+            "\\newcommand{\\bo}{\\mbox{\\boldmath{$o$}}}",
+            "\\newcommand{\\bO}{\\mbox{\\boldmath{$O$}}}",
+            "\\newcommand{\\bp}{\\mbox{\\boldmath{$p$}}}",
+            "\\newcommand{\\bP}{\\mbox{\\boldmath{$P$}}}",
+            "\\newcommand{\\bq}{\\mbox{\\boldmath{$q$}}}",
+            "\\newcommand{\\bQ}{\\mbox{\\boldmath{$Q$}}}",
+            "\\newcommand{\\br}{\\mbox{\\boldmath{$r$}}}",
+            "\\newcommand{\\bR}{\\mbox{\\boldmath{$R$}}}",
+            "\\newcommand{\\bsR}{\\mbox{\\scriptsize{\\bfR}}}",
+            "\\newcommand{\\bs}{\\mbox{\\boldmath{$s$}}}",
+            "\\newcommand{\\bS}{\\mbox{\\boldmath{$S$}}}",
+            "\\newcommand{\\bt}{\\mbox{\\boldmath{$t$}}}",
+            "\\newcommand{\\bT}{\\mbox{\\boldmath{$T$}}}",
+            "\\newcommand{\\bu}{\\mbox{\\boldmath{$u$}}}",
+            "\\newcommand{\\bU}{\\mbox{\\boldmath{$U$}}}",
+            "\\newcommand{\\bsu}{\\boldsymbol{u}}",
+            "\\newcommand{\\bv}{\\mbox{\\boldmath{$v$}}}",
+            "\\newcommand{\\bV}{\\mbox{\\boldmath{$V$}}}",
+            "\\newcommand{\\bw}{\\mbox{\\boldmath{$w$}}}",
+            "\\newcommand{\\bW}{\\mbox{\\boldmath{$W$}}}",
+            "\\newcommand{\\bx}{\\mbox{\\boldmath{$x$}}}",
+            "\\newcommand{\\bX}{\\mbox{\\boldmath{$X$}}}",
+            "\\newcommand{\\by}{\\mbox{\\boldmath{$y$}}}",
+            "\\newcommand{\\bY}{\\mbox{\\boldmath{$Y$}}}",
+            "\\newcommand{\\bz}{\\mbox{\\boldmath{$z$}}}",
+            "\\newcommand{\\bZ}{\\mbox{\\boldmath{$Z$}}}",
+            "\\newcommand{\\bze}{\\mbox{\\boldmath{$0$}}}",
+            "\\newcommand{\\bone}{\\mbox{\\boldmath{$1$}}}",
+            "\\newcommand{\\bemptyset}{\\mbox{\\boldmath{$\\emptyset$}}}",
+            "\\newcommand{\\bmu}{\\mbox{\\boldmath$\\mu$}}",
+            "\\newcommand{\\bSig}{\\mbox{\\boldmath$\\Sigma$}}",
+            "\\newcommand{\\bsig}{\\mbox{\\boldmath$\\sigma$}}",
+            "\\newcommand{\\bSigma}{\\mbox{\\boldmath$\\Sigma$}}",
+            "\\newcommand{\\bsigma}{\\mbox{\\boldmath$\\sigma$}}",
+            "\\newcommand{\\blam}{\\mbox{\\boldmath$\\lambda$}}",
+            "\\newcommand{\\bLam}{\\mbox{\\boldmath$\\Lambda$}}",
+            "\\newcommand{\\bbeta}{\\mbox{\\boldmath$\\beta$}}",
+            "\\newcommand{\\brho}{\\mbox{\\boldmath$\\rho$}}",
+            "\\newcommand{\\bome}{\\mbox{\\boldmath$\\omega$}}",
+            "\\newcommand{\\bOme}{\\mbox{\\boldmath$\\Omega$}}",
+            "\\newcommand{\\bGamma}{\\mbox{\\boldmath$\\Gamma$}}",
+            "\\newcommand{\\bGam}{\\mbox{\\boldmath$\\Gamma$}}",
+            "\\newcommand{\\bPhi}{\\mbox{\\boldmath$\\Phi$}}",
+            "\\newcommand{\\bUpsilon}{\\mbox{\\boldmath$\\Upsilon$}}",
+            "\\newcommand{\\bgamma}{\\mbox{\\boldmath$\\gamma$}}",
+            "\\newcommand{\\bthe}{\\mbox{\\boldmath$\\theta$}}",
+            "\\newcommand{\\bsthe}{\\boldsymbol{\\theta}}",
+            "\\newcommand{\\bep}{\\mbox{\\boldmath$\\varepsilon$}}",
+            "\\newcommand{\\bxi}{\\mbox{\\boldmath$\\xi$}}",
+            "\\newcommand{\\bXi}{\\mbox{\\boldmath$\\Xi$}}",
+            "\\newcommand{\\bsxi}{\\boldsymbol{xi}}",
+            "\\newcommand{\\bdel}{\\mbox{\\boldmath$\\delta$}}",
+            "\\newcommand{\\bem}{\\mbox{\\boldmath$\\emptyset$}}",
+            "\\newcommand{\\tr}{\\mbox{tr}}",
+            "\\newcommand{\\argmin}{\\mathop{\\rmargmin}\\limits}",
+            "\\newcommand{\\argmax}{\\mathop{\\rmargmax}\\limits}",
+            "\\newcommand{\\supp}{\\mathop{\\rmsup}\\limits}",
+            "",
+            "\\newtheorem{thm}{Theorem}[section]",
+            "\\newtheorem{cor}{Corollary}[section]",
+            "\\newtheorem{lem}{Lemma}",
+            "\\newtheorem{pro}{Proposition}[section]",
+            "\\newtheorem{rem}{Remark}",
+            "",
+            "\\title{}",
+            "\\date{}",
+            "\\begin{document}",
+            "\\maketitle",
+            "",
+            "\\end{document}"
+        ],
+        "description": "paper template"
+    },
+    "enumerate":{
+        "prefix": "benu",
+        "body": [
+                "\\begin{enumerate}[$1]",
+                "$2",
+                "\\end{enumerate}"
+        ],
+        "description": "enumerate"
+    },
+    "denumerate":{
+        "prefix": "\\benu",
+        "body": [
+                "\\begin{enumerate}[$1]",
+                "$2",
+                "\\end{enumerate}"
+        ],
+        "description": "enumerate"
+    },
+    "enumerate*":{
+        "prefix": "benus",
+        "body": [
+                "\\begin{enumerate*}[$1]",
+                "$2",
+                "\\end{enumerate*}"
+        ],
+        "description": "enumerate"
+    },
+    "denumerate*":{
+        "prefix": "\\benus",
+        "body": [
+                "\\begin{enumerate*}[$1]",
+                "$2",
+                "\\end{enumerate*}"
+        ],
+        "description": "enumerate"
+    },
+    "align":{
+        "prefix": "bali",
+        "body": [
+                "\\begin{align}",
+                "$1",
+                "\\end{align}"
+        ],
+        "description": "align"
+    },
+    "align*":{
+        "prefix": "balis",
+        "body": [
+                "\\begin{align*}",
+                "$1",
+                "\\end{align*}"
+        ],
+        "description": "align*"
+    },
+    "dalign":{
+        "prefix": "\\bali",
+        "body": [
+                "\\begin{align}",
+                "$1",
+                "\\end{align}"
+        ],
+        "description": "align"
+    },
+    "dalign*":{
+        "prefix": "\\balis",
+        "body": [
+                "\\begin{align*}",
+                "$1",
+                "\\end{align*}"
+        ],
+        "description": "align*"
+    },
+    "equation":{
+        "prefix": "bequ",
+        "body": [
+                "\\begin{equation}",
+                "\\begi{split}",
+                "$1",
+                "\\end{split}",
+                "\\end{equation}"
+        ],
+        "description": "equation"
+    },
+    "equation*":{
+        "prefix": "bequs",
+        "body": [
+                "\\begin{equation*}",
+                "\\begi{split}",
+                "$1",
+                "\\end{split}",
+                "\\end{equation*}"
+        ],
+        "description": "equation*"
+    },
+    "dequation":{
+        "prefix": "\\bequ",
+        "body": [
+                "\\begin{equation}",
+                "\\begi{split}",
+                "$1",
+                "\\end{split}",
+                "\\end{equation}"
+        ],
+        "description": "equation"
+    },
+    "dequation*":{
+        "prefix": "\\bequs",
+        "body": [
+                "\\begin{equation*}",
+                "\\begi{split}",
+                "$1",
+                "\\end{split}",
+                "\\end{equation*}"
+        ],
+        "description": "equation*"
+    },
+    "displaystyle":{
+        "prefix":"dsp",
+        "body":["\\displaystyle"],
+        "description": "displaystyle"
+    },
+    "xa": {
+        "prefix": "xa",
+        "body": [
+            "\\alpha",
+        ],
+        "description": ""
+    },
+    "dxa": {
+        "prefix": "\\xa",
+        "body": [
+            "\\alpha",
+        ],
+        "description": ""
+    },
+    "xb": {
+        "prefix": "xb",
+        "body": [
+            "\\beta",
+        ],
+        "description": ""
+    },
+    "dxb": {
+        "prefix": "\\xb",
+        "body": [
+            "\\beta",
+        ],
+        "description": ""
+    },
+    "xg": {
+        "prefix": "xg",
+        "body": [
+            "\\gamma",
+        ],
+        "description": ""
+    },
+    "dxg": {
+        "prefix": "\\xg",
+        "body": [
+            "\\gamma",
+        ],
+        "description": ""
+    },
+
+}
