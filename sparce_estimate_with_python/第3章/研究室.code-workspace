@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "sparse_estimation_with_python",
+			"path": "../sparse_estimation_with_python"
+		}
+	],
+	"settings": {}
+}

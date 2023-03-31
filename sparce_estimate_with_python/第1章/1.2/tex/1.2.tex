@@ -1,0 +1,223 @@
+\documentclass{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{breqn}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\usepackage{bm}
+%\newtheorem{Ex}{演習問題}
+%\newtheorem*{Ex*}{演習問題}
+\newtheoremstyle{mystyle}%   % スタイル名
+    {}%                      % 上部スペース
+    {}%                      % 下部スペース
+    {\normalfont}%           % 本文フォント
+    {}%                      % インデント量
+    {\bf}%                   % 見出しフォント
+    {}%                      % 見出し後の句読点, '.'
+    { }%                     % 見出し後のスペース, ' ' or \newline
+    {\underline{\thmname{#1}\thmnumber{#2}\thmnote{（#3）}}}%
+                             % 見出しの書式 (can be left empty, meaning `normal')
+\theoremstyle{mystyle} % スタイルの適用
+\newtheorem*{Def}{Def}
+\newtheorem*{theo}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{ex}{Example}
+\newtheorem*{col}{Corollary}
+\renewcommand{\footnotesize}{\normalsize}
+\usepackage{latexsym}
+\usepackage{emathEy}
+\def\qed{\hfill$\Box$}
+
+\begin{document}
+\large
+\section*{劣微分}
+\begin{Def}[凸関数]\mbox{}\\
+関数$f:\mathbb{R}\to\mathbb{R}$が凸関数である，あるいは単に凸であるとは，任意の$0<\alpha<1$と実数$x,y\in \mathbb{R}$に対して
+$$f(\alpha x+(1-\alpha)y)\leq \alpha f(x)+(1-\alpha)f(y)$$
+が成立することとして定義する．
+\end{Def}
+上の定義において，$f$が凸関数であるとは$f$のグラフの上部分が凸集合になることに他ならない．すなわち，$\mathbb{R}^2$の部分集合
+$$A:=\{(a,b)\in\mathbb{R}^2\mid b\geq f(a)\}$$
+が任意の線分を含む集合になることである．つまり，任意の$x,y\in A$を結ぶ線分上の任意の点$z:=\alpha x+(1-\alpha)y$もまた$A$の元となるような集合である\footnote{下で証明します}．\\
+
+
+\begin{ex}\mbox{}\\
+\begin{enumerate}
+\item 関数$f(x)=|x|$は下に凸である．実際，任意の$x,y\in\mathbb{R}$と$0<\alpha<1$に対して，三角不等式を用いることで
+\begin{align*}
+f(\alpha x+(1-\alpha)y)&=|\alpha x+(1-\alpha)y|\\
+&\leq |\alpha x|+(1-\alpha)y|\\
+&=\alpha |x|+(1-\alpha)|y|=\alpha f(x)+(1-\alpha)f(y)
+\end{align*}
+となるからである．\\
+
+\item 関数$f:\mathbb{R}\to\mathbb{R}$が
+\begin{align*}
+f(x)=\begin{cases}
+1&(x\neq 0)\\
+0 & (x=0)
+\end{cases}
+\end{align*}
+で与えられているとき，$f$は凸関数とならない．なぜなら$0,1$と$0<\alpha<1$に対して
+\begin{align*}
+f(\alpha\cdot 0+(1-\alpha)\cdot 1)&=f((1-\alpha)\cdot 1)\\
+&=1>1-\alpha\\
+&=\alpha f(0)+(1-\alpha)f(1)
+\end{align*}
+となり，凸関数の定義を満たさないからである．\\
+\end{enumerate}
+\end{ex}
+凸関数に関する次の系は有用である．
+\begin{col}
+関数$f,g:\mathbb{R}\to\mathbb{R}$が凸関数ならば，任意の実数$\beta,\gamma>\geq 0$に対し，関数
+$$\beta f(x)+\gamma g(y)$$
+もまた凸関数となる．
+\end{col}
+\begin{proof}
+凸関数の定義に沿って計算すると，任意の実数$x,y$と$0<\alpha<1$に対して
+\begin{align*}
+&\beta\{f(\alpha x+(1-\alpha)y\}+\gamma\{g(\alpha x+(1-\alpha)y)\}\\
+&\quad \leq \alpha \beta f(x)+(1-\alpha)\beta f(y)+\alpha\gamma g(x)+(1-\alpha)\gamma g(y)\\
+&\quad =\alpha\{\beta f(x)+\gamma g(x)\}+(1-\alpha)\{\beta f(y)+\gamma g(y)\}
+\end{align*}
+が成立するので，凸関数の定義を満たすことがわかる．\\
+\end{proof}
+以下では，凸関数に対して微分の概念を拡張した劣微分を導入する．
+
+\begin{Def}[劣微分]
+凸関数$f:\mathbb{R}\to\mathbb{R}$と$x_0\in\mathbb{R}$に対し，$\mathbb{R}$の部分集合
+$$\{z\in \mathbb{R}\mid  f(x)\geq f(x_0)+z(x-x_0);\; \forall x\in\mathbb{R}\}$$
+を$f$の$x_0$における劣微分と定義する．
+\end{Def}
+定義より$f$の点$x_0$における劣微分が$0$を含むなら，$f$は$x_0$において最小となることがすぐにわかる．実際任意の実数$x$に対して
+$$f(x)\geq f(x_0)$$
+となるからである．さらに，凸関数の定義より次の定理が成立する．
+\begin{theo}\mbox{}\\
+$f$が$x_0$で微分可能ならば，$f$の$x_0$における劣微分は$f'(x_0)$の一要素のみからなる集合となる．
+\end{theo}
+\begin{proof}
+\begin{description}
+\item[$f'(x_0)$が劣微分に含まれること]\mbox{}\\
+実数$x\in\mathbb{R}$を任意にとって固定する．もし$x=x_0$ならば
+$$f(x)=f(x_0)+f'(x_0)(x-x_0)$$
+が成立するので$x\neq x_0$とする．まず$f$が点$x_0$で微分可能であることから
+\begin{align*}
+\lim_{h\searrow 0}\frac{f(x_0+h)-f(x_0)}{h}&=\lim_{h\nearrow 0}\frac{f(x_0+h)-f(x_0)}{h}=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}
+\end{align*}
+が成立することがわかる．これと$\alpha\to 0$で$\alpha(x-x_0)\to 0$となることと$x-x_0\neq 0$ことより，$x<x_0,x>x_0$のいずれであっても
+\begin{equation}
+\begin{split}
+\label{keisuu}
+\lim_{\alpha\searrow 0}\frac{f(x_0+\alpha(x-x_0))-f(x_0)}{\alpha(x-x_0)}&=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}=f'(x_0)
+\end{split}
+\end{equation}
+が成立することがわかる．\\
+さらに凸関数の定義より，任意の$0<\alpha<1$に対して
+\begin{align*}
+f(\alpha x+(1-\alpha)x_0)\leq \alpha f(x)+(1-\alpha)f(x_0)
+\end{align*}
+が成立する．よって上式を変形することで
+\begin{align*}
+f(\alpha x+(1-\alpha)x_0)-f(x_0)&\leq \alpha (f(x)-f(x_0))\\
+f(x)-f(x_0)&\geq \frac{f(\alpha x+(1-\alpha)x_0)-f(x_0)}{\alpha}\\
+f(x)&\geq f(x_0)+\frac{f(\alpha x+(1-\alpha)x_0)-f(x_0)}{\alpha(x-x_0)}(x-x_0)
+\end{align*}
+が得られる．$0<\alpha<1$は任意であったので，$\alpha\searrow 0$とすることで(\ref{keisuu})式より
+\begin{align*}
+f(x)\geq f(x_0)+f'(x_0)(x-x_0)
+\end{align*}
+となることがわかる．上式で実数$x$は任意にとれたので，$f'(x_0)$が$f$の$x_0$における劣微分に含まれることが示せた．\\
+
+\item[$f'(x_0)$が唯一の元であること]\mbox{}\\
+実数$z$が$f$の$x_0$における劣微分の元であったとする．すなわち，任意の$x\in\mathbb{R}$に対して
+\begin{equation}
+\label{retsu}
+f(x)\geq f(x_0)+z(x-x_0)
+\end{equation}
+が成立していたとする．このとき，上式を変形することで$x>x_0$の範囲において
+\begin{align*}
+z\leq \frac{f(x)-f(x_0)}{x-x_0}
+\end{align*}
+となることが要請されるので
+\begin{align}
+\label{migi}
+z\leq \lim_{x\searrow x_0}\frac{f(x)-f(x_0)}{x-x_0}
+\end{align}
+となる必要がある．一方で，(\ref{retsu})式より$x<x_0$の範囲において
+\begin{align*}
+z\geq \frac{f(x)-f(x_0)}{x-x_0}
+\end{align*}
+となることが要請されるので
+\begin{align}
+\label{hidari}
+z\geq \lim_{x\nearrow x_0}\frac{f(x)-f(x_0)}{x-x_0}
+\end{align}
+となる必要がある．以上(\ref{migi}),(\ref{hidari})式より
+\begin{align*}
+\lim_{x\nearrow x_0}\frac{f(x)-f(x_0)}{x-x_0}\leq z\leq \lim_{x\searrow x_0}\frac{f(x)-f(x_0)}{x-x_0}
+\end{align*}
+が成立することが求められる．$f$は$x_0$で微分可能であったので上式の最右辺と最左辺が$f'(x_0)$に一致することより，上式を満たす$z$は$f'(x_0)$しか存在しないことが示せた．
+\end{description}
+以上より，$f$が$x_0$で微分可能ならば，$f$の$x_0$における劣微分は$f'(x_0)$の一要素のみからなる集合となることがわかった．\\
+\end{proof}
+
+本書の中で扱われるのは，関数$f(x)=|x|$の$0$における劣微分である．この劣微分は閉区間$[-1,1]$に等しいことを以下で証明する．\\
+
+\begin{proof}
+$f$の$0$における劣微分の元$z$を任意にとる．このとき，劣微分の定義から任意の実数$x$に対して
+\begin{align*}
+|x|&\geq zx
+\end{align*}
+が成立する．$x=0$の時は任意の$z$に対して上式が成立するので，$x\neq 0$とすると
+$$z\leq \frac{x}{|x|}$$
+となることがわかる．右辺の絶対値は$1$以下であるので$z\in[-1,1]$となることがわかる．\\
+逆に$z\in [-1,1]$を任意にとると，任意の実数$x$に対して
+\begin{align*}
+f(x)=|x|&\geq |z||x|\geq zx
+\end{align*}
+となることから劣微分の元となることがわかるので，$f(x)=|x|$の$0$における劣微分が閉区間$[-1,1]$に等しいことがわかる．\\
+\end{proof}
+
+
+
+\subsection*{凸関数のエピグラフが凸集合であることの証明}
+$f:\mathbb{R}\to\mathbb{R}$を凸関数とし，$\mathbb{R}^2$の部分集合$A$を
+$$A :=\{(a,b)\in\mathbb{R}^2\mid b\geq f(a)\}$$
+で定める．このとき，任意の${\bm x}=(x_1,x_2),{\bm y}=(y_1,y_2)\in A$に対して
+\begin{equation}
+\label{ayouso}
+f(x_1)\leq x_2,\quad f(y_1)\leq y_2
+\end{equation}
+が成立することに注意する．\\
+今，線分${\bm x},{\bm y}$上の任意の点を${\bm z}$とおく．つまり${\bm z}$は$0<\alpha<1$を用いて
+$${\bm z} = \alpha {\bm x}+(1-\alpha){\bm y}$$
+とかける点であるとする．このとき，${\bm z} = (z_1,z2)$とすると
+\begin{align*}
+{\bm z} &= \left(\begin{array}{c}
+z_1\\
+z_2
+\end{array}\right)=\begin{pmatrix}
+\alpha x_1+ (1-\alpha)y_1\\
+\alpha x_2 +(1-\alpha)y_2
+\end{pmatrix}
+\end{align*}
+となることがわかる．したがって上式から
+\begin{align*}
+f(z_1) &=f(\alpha x_1+ (1-\alpha)y_1)\\
+&\leq \alpha f(x_1) + (1-\alpha) f(y_1)\quad(\because fが凸関数)\\
+&\leq \alpha x_2 +(1-\alpha)y_2\quad (\because (\ref{ayouso})式)\\
+&=z_2
+\end{align*}
+となることから$f(z_1)\leq z_2$がわかるので${\bm z}\in A$となることがわかる．\\
+以上より，$f$が凸関数ならば$f$のエピグラフ$A$は凸集合となることが示せた．\qed\\
+
+\subsection*{個人的なメモ}
+関数$f:\mathbb{R}\to\mathbb{R}$が点$x_0$で微分可能であるとき，$f$が凸関数であるための必要十分条件は任意の実数$x$に対して$f(x)\geq f(x_0)+f'(x_0)(x-x_0)$が成立することである．そこで$x_0$で微分可能でない凸関数$f$についても，
+$$f(x)\geq f(x_0)+z(x-x_0)$$
+を満たす実数$z$は，$f$の$x_0$におけるある種の微分係数とみなすことができるのだと思いました．
+
+
+
+
+
+\end{document}
