@@ -1,17 +1,149 @@
-\documentclass{jsarticle}
-\usepackage{amsmath,amsfonts,amssymb}
-\usepackage{bm}
-\usepackage{enumerate}
-\usepackage{ascmac}
-\usepackage{breqn}
+\documentclass[a4j,11pt]{article}
+%\usepackage[]{graphicx,float,latexsym,times}
+%\usepackage{amsfonts,amstext,amsmath,amssymb,amsthm}
+%\usepackage{caption2}
+
+
+ %***
+%\usepackage{array,epsfig,fancyheadings,rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
 \usepackage{amsthm}
-\theoremstyle{definition}
-%\newtheorem{Ex}{演習問題}
-%\newtheorem*{Ex*}{演習問題}
-\usepackage{latexsym}
-\def\qed{\hfill$\Box$}
-\pagestyle{myheadings}
-\numberwithin{equation}{section}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[subrefformat=parens]{subcaption}
+\usepackage[sectionbib]{natbib}
+
+ \bibliographystyle{plain}
+
+
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+%%%%%%%margins%%%%%%%
+\setlength{\topmargin}{25mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{235mm}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{20mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+%\setlength{\footskip}{1.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\headheight =0mm  \headsep =0mm
+
+\newcommand{\Var}{\mbox{Var}}
+\newcommand{\ba}{\mbox{\boldmath {$a$}}}
+\newcommand{\bA}{\mbox{\boldmath {$A$}}}
+\newcommand{\bb}{\mbox{\boldmath {$b$}}}
+\newcommand{\bB}{\mbox{\boldmath {$B$}}}
+\newcommand{\bc}{\mbox{\boldmath {$c$}}}
+\newcommand{\bC}{\mbox{\boldmath {$C$}}}
+%\newcommand{\bsC}{\boldsymbol{C}}
+\newcommand{\bd}{\mbox{\boldmath {$d$}}}
+\newcommand{\bD}{\mbox{\boldmath {$D$}}}
+\newcommand{\be}{\mbox{\boldmath {$e$}}}
+\newcommand{\bE}{\mbox{\boldmath {$E$}}}
+\newcommand{\bff}{\mbox{\boldmath {$f$}}}
+\newcommand{\bF}{\mbox{\boldmath {$F$}}}
+\newcommand{\bg}{\mbox{\boldmath {$g$}}}
+\newcommand{\bG}{\mbox{\boldmath {$G$}}}
+\newcommand{\bh}{\mbox{\boldmath {$h$}}}
+\newcommand{\bH}{\mbox{\boldmath {$H$}}}
+\newcommand{\bi}{\mbox{\boldmath {$i$}}}
+\newcommand{\bI}{\mbox{\boldmath {$I$}}}
+\newcommand{\bj}{\mbox{\boldmath {$j$}}}
+\newcommand{\bJ}{\mbox{\boldmath {$J$}}}
+\newcommand{\bkk}{\mbox{\boldmath {$k$}}}
+\newcommand{\bpsi}{\mbox{\boldmath {$\psi$}}}
+\newcommand{\bK}{\mbox{\boldmath {$K$}}}
+\newcommand{\bl}{\mbox{\boldmath {$l$}}}
+\newcommand{\bell}{\mbox{\boldmath $ \ell $}}
+\newcommand{\bL}{\mbox{\boldmath {$L$}}}
+\newcommand{\bm}{\mbox{\boldmath {$m$}}}
+\newcommand{\bM}{\mbox{\boldmath {$M$}}}
+\newcommand{\bn}{\mbox{\boldmath $n$}}
+\newcommand{\bN}{\mbox{\boldmath $N$}}
+\newcommand{\bsA}{\mbox{\scriptsize{\bf A}}}
+\newcommand{\bsB}{\mbox{\scriptsize{\bf B}}}
+\newcommand{\bsn}{\mbox{\scriptsize{\bf n}}}
+\newcommand{\bsN}{\mbox{\scriptsize{\bf N}}}
+\newcommand{\bsC}{\mbox{\scriptsize{\bf C}}}
+\newcommand{\bsSig}{\mbox{\scriptsize{\bf $\bSig$}}}
+\newcommand{\bo}{\mbox{\boldmath {$o$}}}
+\newcommand{\bO}{\mbox{\boldmath {$O$}}}
+\newcommand{\bp}{\mbox{\boldmath {$p$}}}
+\newcommand{\bP}{\mbox{\boldmath {$P$}}}
+\newcommand{\bq}{\mbox{\boldmath {$q$}}}
+\newcommand{\bQ}{\mbox{\boldmath {$Q$}}}
+\newcommand{\br}{\mbox{\boldmath {$r$}}}
+\newcommand{\bR}{\mbox{\boldmath {$R$}}}
+\newcommand{\bsR}{\mbox{\scriptsize{\bf R}}}
+\newcommand{\bs}{\mbox{\boldmath {$s$}}}
+\newcommand{\bS}{\mbox{\boldmath {$S$}}}
+\newcommand{\bt}{\mbox{\boldmath {$t$}}}
+\newcommand{\bT}{\mbox{\boldmath {$T$}}}
+\newcommand{\bu}{\mbox{\boldmath {$u$}}}
+\newcommand{\bU}{\mbox{\boldmath {$U$}}}
+\newcommand{\bsu}{\boldsymbol{u}}
+\newcommand{\bv}{\mbox{\boldmath {$v$}}}
+\newcommand{\bV}{\mbox{\boldmath {$V$}}}
+\newcommand{\bw}{\mbox{\boldmath {$w$}}}
+\newcommand{\bW}{\mbox{\boldmath {$W$}}}
+\newcommand{\bx}{\mbox{\boldmath {$x$}}}
+\newcommand{\bX}{\mbox{\boldmath {$X$}}}
+\newcommand{\by}{\mbox{\boldmath {$y$}}}
+\newcommand{\bY}{\mbox{\boldmath {$Y$}}}
+\newcommand{\bz}{\mbox{\boldmath {$z$}}}
+\newcommand{\bZ}{\mbox{\boldmath {$Z$}}}
+\newcommand{\bze}{\mbox{\boldmath {$0$}}}
+\newcommand{\bone}{\mbox{\boldmath {$1$}}}
+\newcommand{\bemptyset}{\mbox{\boldmath {$ \emptyset$}}}
+\newcommand{\bmu}{\mbox{\boldmath $ \mu $}}
+\newcommand{\bSig}{\mbox{\boldmath $ \Sigma $}}
+\newcommand{\bsig}{\mbox{\boldmath $ \sigma $}}
+\newcommand{\bSigma}{\mbox{\boldmath $ \Sigma $}}
+\newcommand{\bsigma}{\mbox{\boldmath $\sigma$}}
+\newcommand{\blam}{\mbox{\boldmath $ \lambda $}}
+\newcommand{\bLam}{\mbox{\boldmath $ \Lambda $}}
+\newcommand{\bbeta}{\mbox{\boldmath $ \beta $}}
+\newcommand{\brho}{\mbox{\boldmath $ \rho $}}
+\newcommand{\bome}{\mbox{\boldmath $ \omega $}}
+\newcommand{\bOme}{\mbox{\boldmath $ \Omega $}}
+\newcommand{\bGamma}{\mbox{\boldmath $\Gamma$}}
+\newcommand{\bGam}{\mbox{\boldmath $\Gamma$}}
+\newcommand{\bPhi}{\mbox{\boldmath $\Phi$}}
+\newcommand{\bUpsilon }{\mbox{\boldmath $\Upsilon $}}
+\newcommand{\bgamma}{\mbox{\boldmath $\gamma$}}
+\newcommand{\bthe}{\mbox{\boldmath $\theta$}}
+\newcommand{\bsthe}{\boldsymbol{\theta}}
+\newcommand{\bep}{\mbox{\boldmath $ \varepsilon $}}
+\newcommand{\bxi}{\mbox{\boldmath $ \xi $}}
+\newcommand{\bXi}{\mbox{\boldmath $ \Xi $}}
+\newcommand{\bsxi}{\boldsymbol{xi}}
+\newcommand{\bdel}{\mbox{\boldmath $ \delta $}}
+\newcommand{\bem   }{\mbox{\boldmath $ \emptyset  $}}
+\newcommand{\tr}{\mbox{tr}}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\supp}{\mathop{\rm sup}\limits}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{lem}{Lemma}
+\newtheorem{pro}{Proposition}[section]
+\newtheorem{rem}{Remark}
 
 \begin{document}
 \large
@@ -21,7 +153,7 @@
 $$t_n \sim sin(2\pi x_n) + \varepsilon \quad \varepsilon \sim N(0,\sigma^2)$$
 となるデータを作成している．このようにして生成されたデータは多くの現実データ集合の持つ性質をよく表している．すなわち，データはこれから学習しようとする規則性を保持してはいるが，それぞれの観測値はランダムノイズによって不正確なものになっている．このノイズは，放射性崩壊のように，本質的に確率的なランダムプロセスによる場合もあるが，多くはそれ自身は観測されない信号源の変動によるものである．\\
 
-我々の木費用は，この訓練集合を利用して，新たな入力変数の値$\hat{x}$に対して$\hat{t}$の値を予測することである．後で見るように，これは背後にある関数$\sin (2\pi x)$を暗に見つけようとすることとほぼ等価であるが，有限個のデータ集合から汎化しなければならない点で，本質的に難しい問題である．さらに，観測データはノイズが乗っており，与えられた$\hat{x}$に対する$\hat t$の値には不確実性がある．1.2説では，そのような不確実性を厳密かつ定量的に評価する枠組みを与える．また1.5説で議論する決定理論は，確率論的な枠組みを利用して，適切な基準の下での最適な予測をすることを可能にする．\\
+我々の目標は，この訓練集合を利用して，新たな入力変数の値$\hat{x}$に対して$\hat{t}$の値を予測することである．後で見るように，これは背後にある関数$\sin (2\pi x)$を暗に見つけようとすることとほぼ等価であるが，有限個のデータ集合から汎化しなければならない点で，本質的に難しい問題である．さらに，観測データはノイズが乗っており，与えられた$\hat{x}$に対する$\hat t$の値には不確実性がある．1.2説では，そのような不確実性を厳密かつ定量的に評価する枠組みを与える．また1.5説で議論する決定理論は，確率論的な枠組みを利用して，適切な基準の下での最適な予測をすることを可能にする．\\
 
 ただしここでは話を先に進めるために，曲線フィッティングに基づく単純なアプローチを，あまり形式ばらない形で考えよう．ここでは特に，以下のような多項式を使ってデータへのフィッティングを行うことにする．
 \begin{equation}
@@ -180,10 +312,74 @@ p(F = a)&=p(F = a\mid B = r)p(B = r) + p(F = o\mid B = r)p(B = r)\\
 \end{split}
 \end{equation}
 となり，また加法定理から$p(F = o) =\displaystyle 1-\frac{11}{20} = \frac{9}{11}$がいえる．一方果物が与えられたもとでの条件付確率はベイズの定理より
+\begin{align}
+p(B = r\mid F = o) = \frac{p(F = o\mid B = r)p(B = r)}{p(F = o)} = \frac{3}{4}\times\frac{4}{10}\times \frac{20}{9}= \frac{2}{3}
+\end{align}
+となる．再び加法定理より$p(B = b\mid F = o) = 1-\frac{2}{3} = \frac{1}{3}$が言える．\\
 
+ベイズの定理において，どの箱を選んだかに関する確率は事前確率と呼ばれ，一旦果物がオレンジであると判明した後に得られる$p(B\mid F)$を事後確率と呼ぶ．\\
+また，2つの変数の同時分布がその周辺分布の積に分解できるとき，すなわち$p(X,Y) = p(X)p(Y)$となるとき，$X$と$Y$は独立であるという．このとき$p(Y\mid X) = P(Y)$であることが乗法定理より得られる．果物の例では各箱に同じ比率でリンゴとオレンジが入っていれば$p(F\mid B) = p(F)$となり，リンゴが選ばれる確率はどの箱が選ばれたかに独立になる．\\
 
+\subsubsection{}
+連続な確率変数についても議論を進めていく．実数値をとる変数$x$が区間$(x,x+\delta x)$に入る確率が$\delta x \to 0$のとき，関数$p(x)$によって$p(x)\delta x$で与えられるとき，$p(x)$を$x$上の確率密度関数と呼ぶ．このとき$x$が区間$(a,b)$にある確率は
+\begin{align}
+p(x\in(a,b)) = \int_a^b p(x)dx
+\end{align}
+で与えられる．確率は非負で$x$は実数値上のどこかを値をとる必要があるため，確率密度は以下の2つの条件を満たす必要がある
+\begin{align}
+p(x)&\geq 0\\
+\int_{-\infty}^{\infty}p(x)dx &= 1
+\end{align}
+変数に非線形な変換を施すと，確率変数はヤコビ行列により単純な関数とは異なる仕方で変換される．例えば，変数変換$x = g(y)$を考えると，関数$f(x)$は$\tilde f(y) = f(g(y))$となる．確率密度$p_x(x)$に対応する，新しい変数$y$に関する密度$p_y(y)$を考える．区間$(x,x+ \delta x)$に入る観測値$x'$に対応する観測値$y'$は，$\delta x$が小さければ区間$(y,y + \delta y)$に入り，$p_x(x)\delta x\simeq p_y(y)\delta y$となるから
+\begin{equation}
+\begin{split}
+p_y(y) &= p_x(x)\left|\frac{dx}{dy}\right|\\
+&=p_x(g(y))|g'(y)|
+\end{split}
+\end{equation}
+となる．これより確率密度の最大値は変数の選び方に依存することがわかる．\\
 
+$x$が区間$(-\infty,z)$に入る確率は累積分布関数
+\begin{align}
+P(z) = \int_{-\infty}^zp(x)dx
+\end{align}
+で定義され，これは$P'(x) = p(x)$を満たす．\\
+いくつかの連続変数$x_1,\cdots,x_D$があるとき，これをまとめてベクトル$\bf x$で表すと同時分布$p(\bf x) = p(x_1,\cdots,x_D)$を定義することができて，$\bf x$が$\bf x$を含む無限小の体積要素$\delta \bf x$に入る確率は$p(\bf x)\delta \bf x$で与えられる．この多変数確率密度は
+\begin{align}
+p(\bf x) & \geq 0\\
+\int p(\bf x)d {\bf x} &= 1
+\end{align}
+を満たす必要がある．また$x$が離散変数の時は$p(x)$は確率質量関数と呼ばれる．連続変数においても離散変数と同様に，確率の加法定理・乗法定理を用いることが可能で
+\begin{align}
+p(x) &= \int p(x,y) dy\\
+p(x,y) &= p(y\mid x)p(x)
+\end{align}
+の形をとる．\\
+
+\subsubsection{}
+確率を含むもっとも重要な操作の1つは重み付きの平均を求めることである．関数$f(x)$の，確率分布$p(x)$の下での平均値を$f(x)$の期待値と呼び，$\mathbb{E}[f]$と書く．離散分布に対しては
+\begin{align}
+\mathbb{E}[f] = \sum_{x}p(x)f(x)
+\end{align}
+で与えられ，連続変数の場合の期待値は
+\begin{align}
+\mathbb{E}[f] = \int p(x)f(x)dx
+\end{align}
+で与えられる．どちらの場合も確率分布や確率密度から得られた有限個の$N$点を用いて，期待値はこれらの値の有限和
+\begin{align}
+\mathbb{E}[f] \simeq \frac{1}{N}\sum_{n=1}^N f(x_n)
+\end{align}
+で近似できる．この近似は大数の法則より，$N\to\infty$で厳密になる．\\
+多変数関数の期待値を考えることもあるが，この場合には，どの変数について平均を取るのかを示すのに添え字を使う．例えば，
+\begin{align}
+\mathbb{E}_x[f(x,y)]
+\end{align}
+は関数$f(x,y)$の$x$の分布に関する平均を表す．$\mathbb{E}_x[f(x,y)]$は$y$の関数になることに注意する．\\
+条件付き分布についても条件付き期待値を考えることができ，
+\begin{align}
+\mathbb{E}_x[f\mid y] = \sum_{x}p(x\mid y)f(x)
+\end{align}
+となり，連続変数についても同様に定義できる．
 
 \end{document}
-
 
