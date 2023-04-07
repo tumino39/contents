@@ -1,4 +1,4 @@
-\documentclass[a4j,11pt]{article}
+\documentclass[a4j,11pt]{jsarticle}
 %\usepackage[]{graphicx,float,latexsym,times}
 %\usepackage{amsfonts,amstext,amsmath,amssymb,amsthm}
 %\usepackage{caption2}
@@ -21,6 +21,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[subrefformat=parens]{subcaption}
 \usepackage[sectionbib]{natbib}
+\pagestyle{myheadings}
 
  \bibliographystyle{plain}
 
@@ -44,6 +45,7 @@
 \headheight =0mm  \headsep =0mm
 
 \newcommand{\Var}{\mbox{Var}}
+\newcommand{\cov}{\mbox{cov}}
 \newcommand{\ba}{\mbox{\boldmath {$a$}}}
 \newcommand{\bA}{\mbox{\boldmath {$A$}}}
 \newcommand{\bb}{\mbox{\boldmath {$b$}}}
@@ -138,6 +140,8 @@
 \newcommand{\argmin}{\mathop{\rm argmin}\limits}
 \newcommand{\argmax}{\mathop{\rm argmax}\limits}
 \newcommand{\supp}{\mathop{\rm sup}\limits}
+\newcommand{\E}{\mathbb{E}}
+\numberwithin{equation}{section}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{cor}{Corollary}[section]
@@ -158,55 +162,55 @@ $$t_n \sim sin(2\pi x_n) + \varepsilon \quad \varepsilon \sim N(0,\sigma^2)$$
 ただしここでは話を先に進めるために，曲線フィッティングに基づく単純なアプローチを，あまり形式ばらない形で考えよう．ここでは特に，以下のような多項式を使ってデータへのフィッティングを行うことにする．
 \begin{equation}
 \begin{split}
-y(x,{\bm w}) = w_0 + w_1x + w_2x^2 + \cdots + w_Mx^M = \sum_{j=0}^M w_j x^j
+y(x,{\bw}) = w_0 + w_1x + w_2x^2 + \cdots + w_Mx^M = \sum_{j=0}^M w_j x^j
 \end{split}
 \end{equation}
-ただし，$M$は多項式の次数で，$x^j$は$x$の$j$乗を表す．多項式$y(x,{\bm w})$は$x$の非線形関数であるものの，係数${\bm w}$の線形関数であることに注意する．すなわち，相異なる$x_1,x_2$に対して
-$$y(x_1,{\bm w}) + y(x_2,{\bm w}) = y(x_1+x_2,{\bm w})$$
-は常には成り立たないものの，相異なる${\bm w}_1,{\bm w}_2$に対しては
+ただし，$M$は多項式の次数で，$x^j$は$x$の$j$乗を表す．多項式$y(x,{\bw})$は$x$の非線形関数であるものの，係数${\bw}$の線形関数であることに注意する．すなわち，相異なる$x_1,x_2$に対して
+$$y(x_1,{\bw}) + y(x_2,{\bw}) = y(x_1+x_2,{\bw})$$
+は常には成り立たないものの，相異なる${\bw}_1,{\bw}_2$に対しては
 \begin{align*}
-  y(x,{\bm w}_1) + y(x,{\bm w}_2) = y(x,{\bm w}_1 + {\bm w}_2)
+  y(x,{\bw}_1) + y(x,{\bw}_2) = y(x,{\bw}_1 + {\bw}_2)
 \end{align*}
 が成立する．多項式のように，未知のパラメータに関して線形であるような関数は非常に重要な性質を持つ．それらは線形モデルと呼ばれ，のちの章で詳細に議論する．\\
-訓練データに多項式を当てはめることで係数の値を求めてみよう．これは${\bm w}$を任意に固定した時の関数$y(x,{\bm w})$の値と訓練集合のデータ点との間のずれを測る誤差関数の最小化で達成できる．誤差関数の選び方として，単純で広く用いられているのは，各データ点$x_n$における予測値$y(x_n,{\bm w})$と対応する目標値$t_n$との二乗和誤差
+訓練データに多項式を当てはめることで係数の値を求めてみよう．これは${\bw}$を任意に固定した時の関数$y(x,{\bw})$の値と訓練集合のデータ点との間のずれを測る誤差関数の最小化で達成できる．誤差関数の選び方として，単純で広く用いられているのは，各データ点$x_n$における予測値$y(x_n,{\bw})$と対応する目標値$t_n$との二乗和誤差
 \begin{align}
   \label{gosa}
-E({\bm w}) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,{\bm w}) - t_n\}^2
+E({\bw}) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,{\bw}) - t_n\}^2
 \end{align}
-となり，これを最小化することになる．のちにこの関数を選ぶ理由について議論するが，利点の1つは，これが微分可能な凸関数であることにある．また，上の関数が$0$となるのは$y(x,{\bm w}_n)$が全訓練データを通るとき，かつその時に限ることに注意する．\\
+となり，これを最小化することになる．のちにこの関数を選ぶ理由について議論するが，利点の1つは，これが微分可能な凸関数であることにある．また，上の関数が$0$となるのは$y(x,{\bw}_n)$が全訓練データを通るとき，かつその時に限ることに注意する．\\
 
 
-このように$E({\bm w})$をできるだけ小さくするような$\bm w$を選ぶことで曲線当てはめ問題を解くことができる．誤差関数は係数$\bm w$の二次関数だから，その係数に関する微分は$\bm w$の要素に関して線形になり，誤差関数を最小にするただ1つの解$\bm w^{\star}$が
+このように$E({\bw})$をできるだけ小さくするような$\bw$を選ぶことで曲線当てはめ問題を解くことができる．誤差関数は係数$\bw$の二次関数だから，その係数に関する微分は$\bw$の要素に関して線形になり，誤差関数を最小にするただ1つの解$\bw^{\star}$が
 $\varphi(x) := (x^0 ,x,x^2,\cdots,x^M)^T$
 として
 \begin{align*}
-\bm w^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T \right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
+\bw^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T \right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
 \end{align*}
-と閉じた形で求まる．実際$y(x,\bm w) = \varphi(x)^T \bm w$に注意して(\ref{gosa})式を${\bm w}$で微分して$0$と置くと
+と閉じた形で求まる．実際$y(x,\bw) = \varphi(x)^T \bw$に注意して(\ref{gosa})式を${\bw}$で微分して$0$と置くと
 \begin{align*}
-\nabla E(\bm w) &= \sum_{n=1}^N\varphi(x_n)\{\varphi(x)^T \bm w-t_n\}\\
+\nabla E(\bw) &= \sum_{n=1}^N\varphi(x_n)\{\varphi(x)^T \bw-t_n\}\\
                 &= \sum_{n = 1}^N (\varphi(x_n)\varphi(x_n)^Tw - \varphi(x_n)^T t_n) = 0\\
-                \therefore \bm w &= (\varphi(x_n) \varphi(x_n)^T)^{-1}(\varphi(x_n)t_n)
+                \therefore \bw &= (\varphi(x_n) \varphi(x_n)^T)^{-1}(\varphi(x_n)t_n)
 \end{align*}
-が得られる．また，これより結果として得られる多項式は$y(x,\bm w^{\star})$となる．\\
+が得られる．また，これより結果として得られる多項式は$y(x,\bw^{\star})$となる．\\
 
 あとは多項式の次数$M$を選ぶ問題が残っているが，この問題はモデル比較(モデル選択)と呼ぶ重要な概念の一例とみなすことができる．\\
 
 例に見る通り$M=0,1$の場合にはあまりデータへの当てはまりが良くない一方で，$M=3$の場合がこの中では$\sin(2\pi x)$にもっともよく当てはまっているように見える．しかし$M=9$にした場合，訓練データには非常によく当てはまっている(実際にこの多項式は全データを通っている)ものの曲線は無茶苦茶に発振したようになっており，関数$\sin(2\pi x)$の表現として明らかに不適切である．このような学習は過学習として知られている．\\
 
-我々の目標は新たなデータに対して正確な予測を行える高い汎化性能を達成することである．汎化性能が次数$M$にどう依存するかを定量的に評価するため，100個のデータ点からなる独立したテスト集合を，訓練データとまったく同じ方法で生成する．すると，選んだ$M$の各値について(\ref{gosa})式で与えられる$E(\bm w^{\star})$の残渣が計算できるが，テスト集合についても$E(\bm w^{\star})$を評価できる．このとき，
+我々の目標は新たなデータに対して正確な予測を行える高い汎化性能を達成することである．汎化性能が次数$M$にどう依存するかを定量的に評価するため，100個のデータ点からなる独立したテスト集合を，訓練データとまったく同じ方法で生成する．すると，選んだ$M$の各値について(\ref{gosa})式で与えられる$E(\bw^{\star})$の残渣が計算できるが，テスト集合についても$E(\bw^{\star})$を評価できる．このとき，
 \begin{equation}
 \begin{split}
-  E_{RMS}&=\sqrt{2E(\bm w^{\star}/N)}\\
-          &= \sqrt{\frac{1}{N}\sum_{n=1}^N \{y(x_n,\bm w^{\star}) - t_n\}^2}
+  E_{RMS}&=\sqrt{2E(\bw^{\star}/N)}\\
+          &= \sqrt{\frac{1}{N}\sum_{n=1}^N \{y(x_n,\bw^{\star}) - t_n\}^2}
 \end{split}
 \end{equation}
 で定義される平均二乗平方根誤差を用いると比較に便利なことがある．$N$で割ることによってサイズの異なるデータ集合を比較することができるようになり，平方根をとることによって$E_{RMS}$は目的変数$t$と同じ尺度であることが保障される．テスト集合の誤差は新たな$x$を観測した時に$t$をどれだけよく予測できたかを表している．例の通り，$M$が小さいと誤差が大きく，これは$\sin(2\pi x)$の振動をとらえることができないことを意味しており，$3\leq M\leq 8$では比較的誤差が小さく妥当な表現といえる．\\
 
-$M=9$では訓練集合の誤差は$0$になる．しかし関数$u(x,\bm w^{\star})$の無茶苦茶な発振が起きるので，テスト集合の誤差は非常に大きくなる．$M=9$次の多項式が潜在的に$M=3$次の多項式を含むことを考えると，このことはパラドックスのように思えることもある．\\
+$M=9$では訓練集合の誤差は$0$になる．しかし関数$u(x,\bw^{\star})$の無茶苦茶な発振が起きるので，テスト集合の誤差は非常に大きくなる．$M=9$次の多項式が潜在的に$M=3$次の多項式を含むことを考えると，このことはパラドックスのように思えることもある．\\
 さらに新たなデータに対する最良な予測関数はデータを生成した関数$\sin (2\pi x)$であると考えることもできる．後にこのことを示す．関数$\sin (2\pi x)$の級数展開は区間$(0,1)$ですべての次数の項を含むことより，$M$を増やせば増やすほど単調に良い結果が得られると期待してしまう．\\
 
-いろいろな次数の多項式について得られた$\bm w^{\star}$の値を検証してみると，$M$の増加に伴って係数の多くが大きな値をとるようになることがわかる．これにより訓練集合のデータ点にはピッタリ適合するものの，データ点とデータ点の間では大きな発振が起こってしまう．\\
+いろいろな次数の多項式について得られた$\bw^{\star}$の値を検証してみると，$M$の増加に伴って係数の多くが大きな値をとるようになることがわかる．これにより訓練集合のデータ点にはピッタリ適合するものの，データ点とデータ点の間では大きな発振が起こってしまう．\\
 
 次にモデルの次数は固定し，データ集合のサイズを変えてみた時の振る舞いについて，モデルの複雑さを固定した時，データ集合のサイズが大きくなるにつれて過学習の問題は深刻ではなくなってくることがわかる．別な言い方をすると，データ集合を大きくすればするほど，より複雑で柔軟なモデルをデータにあてはめられるようになる．大雑把な経験則としては，データ点の数はモデル中の適応パラメータの数の何倍かよりは小さくてはならない，と言われている．しかし，3章で見るように，必ずしもパラメータの数がモデルの複雑さを測る最適な尺度というわけではない．\\
 
@@ -217,11 +221,11 @@ $M=9$では訓練集合の誤差は$0$になる．しかし関数$u(x,\bm w^{\st
 ベイズ的アプローチ以外で，複雑で柔軟なモデルを限られたサイズのデータ集合に対して使うことができるかを考える．過学習の現象を制御するためによく使われる手法として正則化がある．これは誤差関数に罰金項を付加することにより係数が大きな値になることを防ごうとするものである．そのようなもので最も単純な誤差関数は
 \begin{align}
   \label{ridge}
-\tilde E(\bm w) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,\bm w)- t_n\}^2+\frac{\lambda}{2}\|w\|^2
+\tilde E(\bw) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,\bw)- t_n\}^2+\frac{\lambda}{2}\|w\|^2
 \end{align}
 である．ただし一般性を失うことなく$w_0 = 0$とすることができ，正則化からは外すことも多い．この場合も誤差関数(\ref*{ridge})式を最小にする解は
 \begin{align*}
-  \bm w^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T + \lambda I\right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
+  \bw^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T + \lambda I\right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
   \end{align*}
 と閉じた形で求まる．このようなテクニックは統計学の分野で縮小推定と呼ばれており，特に2次の場合はリッジ回帰と呼ばれる．またニューラルネットワークの分野では荷重減衰として知られている．\\
 
@@ -272,9 +276,10 @@ p(Y = y_j\mid X = x_i) = \frac{n_{ij}}{c_i}
 これは確率の乗法定理である．\\
 まとめると，確率論の基本法則を以下のように書くことができる．
 \begin{align}
-{\rm 確率の加法定理}\qquad & p(X) = \sum_Y p(X,Y)\\
-{\rm 確率の乗法定理} \qquad& p(X,Y) = p(Y\mid X)p(X)
+\qquad & p(X) = \sum_Y p(X,Y)\\
+\qquad& p(X,Y) = p(Y\mid X)p(X)
 \end{align}
+
 乗法定理と対称性$p(X,Y) = p(Y,X)$より関係式
 \begin{align}
 p(Y\mid X) = \frac{p(X\mid Y)p(Y)}{p(X)}
@@ -379,7 +384,134 @@ p(x,y) &= p(y\mid x)p(x)
 \begin{align}
 \mathbb{E}_x[f\mid y] = \sum_{x}p(x\mid y)f(x)
 \end{align}
-となり，連続変数についても同様に定義できる．
+となり，連続変数についても同様に定義できる．\\
+
+$f$の分散は
+\begin{align}
+\Var[f] = \mathbb{E}\left[(f(x) - \mathbb{E}[f(x)])^2\right]
+\end{align}
+と定義され，$f(x)$がその平均のまわりでどれくらいばらつくかの尺度になる．上式を展開すると
+\begin{equation}
+\begin{split}
+\Var[f] &= \mathbb{E}\left[(f(x))^2  - 2f(x) \mathbb{E}[f(x)] +\mathbb{E}[f(x)] ^2\right]\\
+&=\mathbb{E}[f(x)^2] - \mathbb{E}[f(x)] ^2
+\end{split}
+\end{equation}
+と書くこともできる．特に確率変数$x$自体の分散を考えることができ，
+\begin{align}
+\Var[x]  =\mathbb{E}[x^2] - \mathbb{E}[x]^2
+\end{align}
+となる．2つの確率変数$x,y$の間の共分散は
+\begin{equation}
+\begin{split}
+\cov[x,y]& = \E_{x,y}[\{x - \E[x]\}\{y - \E[y]\}]\\
+&= \E_{x,y}[xy] - \E[x]\E[y]
+\end{split}
+\end{equation}
+と定義され，$x$と$y$が同時に変動する度合いを表している．$x,y$が独立なら$p(x,y) = p(x)p(y)$となることより
+\begin{align*}
+\E[xy] &= \int xy p(x,y)dxdy\\
+&=\int xp(x)dx \int y p(y) dy= \E[x]\E[y]
+\end{align*}
+となり，共分散が$0$になる．\\
+2つの確率変数ベクトル$\bx,\by$に関して共分散は行列
+\begin{equation}
+\begin{split}
+\cov[\bf x,\bf y] &= \E_{\bf x,\bf y}[\{\bf x - \E[\bf x]\}\{\bf y^T - \E[\bf y^T]\}]\\
+&=\E_{\bf x,\bf y}[\bf x\bf y^T] - \E[\bf x]\E[\bf y^T]
+\end{split}
+\end{equation}
+となる．この行列の各成分は
+\begin{align*}
+  (\cov[{\bf x,\bf y}] )_{i,j} = \E[x_i y_j] - \E[x_i]\E[y_j]
+\end{align*}
+とかくことができ，特に$\bf y = \bf x$とすると
+\begin{align*}
+  (\cov[{\bf x,\bf x}] )_{i,j} = \E[x_i x_j] - \E[x_i]\E[x_j]
+\end{align*}
+となり，対角成分が分散を表す分散共分散行列となる．\\
+\subsubsection{}
+これまでは確率をランダムな繰り返し試行の頻度とみなしてきたが，ここではより一般的なベイズ的な見方を導入する．そこでは確率は不確実性の度合いを与える．1.1節の多項式曲線フィッティングの例を考える．観測される変数$t_n$にのるノイズに頻度主義的な確率の概念を当てはめることは妥当であろう．しかしながら，我々はモデルパラメータ$\bw$の適切な選び方に関する不確実性を取り扱い，そして定量化したい．ベイズ的な観点を採用すれば，$\bw$といったモデルパラメータの他，モデルそのものの選択に関する不確実性を表すのに確率論の道具が使えることを見ていこう．\\
+
+果物の箱の例では，果物の種類を観測することが，選ばれた箱が赤である確率を変える本質的な情報になっていた．そこでは観測されたデータで与えられた証拠を取り込むことで，事前確率を事後確率に変換できた．同様のアプローチは多項式曲線フィッティングにおけるパラメータの推論にも採用できる．データを観測する前にあらかじめ$\bw$に関する我々の仮説を事前確率分布$p(\bw)$の形で取り込んでおく．観測データ$\mathcal{D} = \{t_1,\cdots,t_N\}$の効果は，後に見るように$p(\mathcal{D}\mid \bw)$という条件付き確率で陽に表現される．ベイズの定理は
+\begin{align}
+  \label{bais}
+p(\bw \mid \mathcal{D}) = \frac{p(\mathcal{D}\mid \bw)p(\bw)}{P(\mathcal{D})}
+\end{align}
+という形をとり，$\mathcal{D}$を観測した事後に$\bw$に関する不確実性を事後分布$p(\bw \mid \mathcal{D})$の形で評価することを可能にする．\\
+右辺にある$p(\mathcal{D}\mid \bw)$は尤度関数と呼ばれ，パラメータベクトル$\bw$を固定したときに観測されたデータがどれくらい起こりやすいかを表している．尤度は$\bw$に関する確率分布では無いことに注意する．\\
+尤度の定義から，ベイズの定理は言葉でかけば
+\begin{align}
+  {\rm 事後確率}\propto {\rm 尤度}\times {\rm 事前確率}
+\end{align}
+となり，この式に現れる全ての値は$\bw$の関数とみなせる．(\ref{bais})式の分母は，左辺の事後分布が積分して1になることを保証する規格化定数である．実際(\ref{bais})式の両辺を$\bw$で微分することで
+\begin{equation}
+\begin{split}
+\int p(\bw \mid \mathcal{D})d\bw &= \int\frac{p(\mathcal{D}\mid \bw)p(\bw)}{P(\mathcal{D})}d\bw\\
+\Leftrightarrow \int p(\bw\mid \mathcal{D})p(\mathcal{D})d\bw &= \int p(\mathcal{D}\mid \bw)p(\bw)d\bw
+\end{split}
+\end{equation}
+となり，左辺は$p(\mathcal{D})$を表している．ベイズと頻度主義両方の考え方で，尤度関数$p(\mathcal{D}\mid \bw)$は重要な役割を果たす．しかしながら，それをどう使うかは2つのアプローチで根本的に異なる．頻度主義的な設定では$\bw$は固定したパラメータと考えられ，その値は何らかの推定量として定められ，この推定の誤差範囲は可能なデータ集合$\mathcal{D}$の分布を考慮して得られる．一方ベイズ的な見方ではただ1つのデータ集合$\mathcal{D}$があって，パラメータに用いる不確実性は$\bw$の確率分布として表される．\\
+
+頻度主義では最尤推定が広く用いられており，$\bw$は尤度関数を最大にする値である．これは観測されたデータ集合が，実際に観測される確率を最大にする$\bw$の値を選ぶことに相当する．機械学習の分野において，尤度の対数の符号を反転したものは誤差関数と呼ばれる．\\
+
+頻度主義で誤差範囲を決める1つのアプローチはブートストラップと呼ばれているもので，そこではデータ集合$\bX$から復元抽出を繰り返すことによって新たなデータ集合を作成し，異なるブートストラップデータ集合に対する予測の変動を見ることでパラメータ推定の統計的な精度を評価することができる．\\
+
+ベイズ的な視点の利点は事前知識を自然に入れられる点にある．3回のコイン投げで全て表が出た場合，最尤推定では表が出る確率は1になってしまうが，ベイズ的なアプローチを用いればそのように極端な結論を導くことが無い．
+ベイズアプローチに対する批判の1つに，事前分布の選び方によって結果が主観的になるというものがある．事前分布への依存を小さくするために無情報事前分布を用いることがあるが，これは異なるモデルを比較する際に困難が生じる．%%%%%どんな？
+また，悪い事前分布を選べば高い確率で悪い結果が得られてしまう．これらの問題は頻度主義的な評価方法によってある程度防ぐことができ，交差確認といったテクニックがモデル選択などの問題には有効に働く．\\
+
+\subsubsection{ガウス分布}
+本書の多くで頻繁に用いられるについて述べる．\\
+単一の実数値変数$x$に対し，ガウス分布は
+\begin{align}
+\label{gauss}
+\mathcal{N}(x\mid \mu,\sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac{1}{2\sigma^2}(x-\mu)^2\right\}
+\end{align}
+と定義され，2つのパラメータ，平均$\mu$と分散$\sigma^2$を持つ．分散の平方根$\sigma$は標準偏差と呼ばれ，分散の逆数は$\beta = \frac{1}{\sigma^2}$と書き，精度パラメータと呼ぶ．\\
+(\ref{gauss})式の形から，ガウス分布は
+\begin{align}
+\mathcal{N}(x\mid \mu,\sigma^2)>0
+\end{align}
+を満たすことがわかる．また，規格化されていることは$I := \displaystyle\int \exp\left\{-\frac{x^2}{2\sigma^2}\right\}dx$として
+
+
+\begin{equation}
+\begin{split}
+  \label{kikaku}
+  I^2 &= \int\int \exp\left\{-\frac{x^2}{2\sigma^2}-\frac{y^2}{2\sigma^2}\right\}dxdy\\
+  &=\int_0^{2\pi} \int_{0}^{\infty}\exp\left\{-\frac{r^2}{2\sigma^2}\right\}\cdot r drd\theta\quad (\because x = r\sin\theta,y = r\cos\theta\;{\rm の変換} )\\
+  &= 2\pi \int_0^{\infty}r \exp\left\{-\frac{r^2}{2\sigma^2}\right\}dr\\
+  &=\pi \int_0^{\infty}\exp\left\{-\frac{u}{2\sigma^2}\right\}du(r^2 = u\;{\rm の変換})\\
+  &=\pi\left[-2\sigma^2\exp\left(-\frac{u}{2\sigma^2}\right)\right]_0^{\infty}\\
+  &= 2\pi\sigma^2\\
+  \therefore I &= \sqrt{2\pi\sigma^2}\\
+  \therefore \int  &\frac{1}{(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac{1}{2\sigma^2}(x-\mu)^2\right\}dx = 1
+\end{split}
+\end{equation}
+となることより確認できる．また期待値は(\ref{kikaku})式の両辺を$\mu$で微分することで
+\begin{equation}
+\begin{split}
+-\frac{1}{\sigma^2}\int\frac{1}{\sqrt{2\pi\sigma^2}}(x-\mu)\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx &= 0\\
+\mu\int \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx &= \int x\cdot \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+\therefore \mu &= \int x\cdot \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx = \E[x]
+\end{split}
+\end{equation}
+となり，分散は(\ref{kikaku})式の両辺を$\sigma^2$で微分することで
+\begin{equation}
+\begin{split}
+\int \left\{-\frac{1}{2\sqrt{2\pi\sigma^2}}\cdot \frac{1}{\sigma^2}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\right. &  +\left. \frac{1}{\sqrt{2\pi \sigma^2}}\cdot \frac{(x-\mu)^2}{2\sigma^4}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\right\}dx = 0\\
+\frac{1}{2\sigma^2}& = \frac{1}{2\sigma^4}\int\frac{(x - \mu)^2}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right)dx\\
+\sigma^2 &= \int\frac{(x - \mu)^2}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right)dx
+\end{split}
+\end{equation}
+となることがわかる．さらに分布の最大値を与えるモード(最頻値)を考えると，(\ref{gauss})式を$x$で微分して$0$とおいた式を解いて
+\begin{align*}
+\frac{d}{dx}\mathcal{N}(x\mid \mu,\sigma^2) = -\frac{(x - \mu)}{\sigma^2\sqrt{2\pi \sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right) = 0\\
+\therefore x = \mu
+\end{align*}
+となることより期待値と一致することがわかる．\\
+
 
 \end{document}
 
