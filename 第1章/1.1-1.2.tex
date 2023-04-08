@@ -1,0 +1,517 @@
+\documentclass[a4j,11pt]{jsarticle}
+%\usepackage[]{graphicx,float,latexsym,times}
+%\usepackage{amsfonts,amstext,amsmath,amssymb,amsthm}
+%\usepackage{caption2}
+
+
+ %***
+%\usepackage{array,epsfig,fancyheadings,rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[subrefformat=parens]{subcaption}
+\usepackage[sectionbib]{natbib}
+\pagestyle{myheadings}
+
+ \bibliographystyle{plain}
+
+
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+%%%%%%%margins%%%%%%%
+\setlength{\topmargin}{25mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{235mm}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{20mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+%\setlength{\footskip}{1.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\headheight =0mm  \headsep =0mm
+
+\newcommand{\Var}{\mbox{Var}}
+\newcommand{\cov}{\mbox{cov}}
+\newcommand{\ba}{\mbox{\boldmath {$a$}}}
+\newcommand{\bA}{\mbox{\boldmath {$A$}}}
+\newcommand{\bb}{\mbox{\boldmath {$b$}}}
+\newcommand{\bB}{\mbox{\boldmath {$B$}}}
+\newcommand{\bc}{\mbox{\boldmath {$c$}}}
+\newcommand{\bC}{\mbox{\boldmath {$C$}}}
+%\newcommand{\bsC}{\boldsymbol{C}}
+\newcommand{\bd}{\mbox{\boldmath {$d$}}}
+\newcommand{\bD}{\mbox{\boldmath {$D$}}}
+\newcommand{\be}{\mbox{\boldmath {$e$}}}
+\newcommand{\bE}{\mbox{\boldmath {$E$}}}
+\newcommand{\bff}{\mbox{\boldmath {$f$}}}
+\newcommand{\bF}{\mbox{\boldmath {$F$}}}
+\newcommand{\bg}{\mbox{\boldmath {$g$}}}
+\newcommand{\bG}{\mbox{\boldmath {$G$}}}
+\newcommand{\bh}{\mbox{\boldmath {$h$}}}
+\newcommand{\bH}{\mbox{\boldmath {$H$}}}
+\newcommand{\bi}{\mbox{\boldmath {$i$}}}
+\newcommand{\bI}{\mbox{\boldmath {$I$}}}
+\newcommand{\bj}{\mbox{\boldmath {$j$}}}
+\newcommand{\bJ}{\mbox{\boldmath {$J$}}}
+\newcommand{\bkk}{\mbox{\boldmath {$k$}}}
+\newcommand{\bpsi}{\mbox{\boldmath {$\psi$}}}
+\newcommand{\bK}{\mbox{\boldmath {$K$}}}
+\newcommand{\bl}{\mbox{\boldmath {$l$}}}
+\newcommand{\bell}{\mbox{\boldmath $ \ell $}}
+\newcommand{\bL}{\mbox{\boldmath {$L$}}}
+\newcommand{\bm}{\mbox{\boldmath {$m$}}}
+\newcommand{\bM}{\mbox{\boldmath {$M$}}}
+\newcommand{\bn}{\mbox{\boldmath $n$}}
+\newcommand{\bN}{\mbox{\boldmath $N$}}
+\newcommand{\bsA}{\mbox{\scriptsize{\bf A}}}
+\newcommand{\bsB}{\mbox{\scriptsize{\bf B}}}
+\newcommand{\bsn}{\mbox{\scriptsize{\bf n}}}
+\newcommand{\bsN}{\mbox{\scriptsize{\bf N}}}
+\newcommand{\bsC}{\mbox{\scriptsize{\bf C}}}
+\newcommand{\bsSig}{\mbox{\scriptsize{\bf $\bSig$}}}
+\newcommand{\bo}{\mbox{\boldmath {$o$}}}
+\newcommand{\bO}{\mbox{\boldmath {$O$}}}
+\newcommand{\bp}{\mbox{\boldmath {$p$}}}
+\newcommand{\bP}{\mbox{\boldmath {$P$}}}
+\newcommand{\bq}{\mbox{\boldmath {$q$}}}
+\newcommand{\bQ}{\mbox{\boldmath {$Q$}}}
+\newcommand{\br}{\mbox{\boldmath {$r$}}}
+\newcommand{\bR}{\mbox{\boldmath {$R$}}}
+\newcommand{\bsR}{\mbox{\scriptsize{\bf R}}}
+\newcommand{\bs}{\mbox{\boldmath {$s$}}}
+\newcommand{\bS}{\mbox{\boldmath {$S$}}}
+\newcommand{\bt}{\mbox{\boldmath {$t$}}}
+\newcommand{\bT}{\mbox{\boldmath {$T$}}}
+\newcommand{\bu}{\mbox{\boldmath {$u$}}}
+\newcommand{\bU}{\mbox{\boldmath {$U$}}}
+\newcommand{\bsu}{\boldsymbol{u}}
+\newcommand{\bv}{\mbox{\boldmath {$v$}}}
+\newcommand{\bV}{\mbox{\boldmath {$V$}}}
+\newcommand{\bw}{\mbox{\boldmath {$w$}}}
+\newcommand{\bW}{\mbox{\boldmath {$W$}}}
+\newcommand{\bx}{\mbox{\boldmath {$x$}}}
+\newcommand{\bX}{\mbox{\boldmath {$X$}}}
+\newcommand{\by}{\mbox{\boldmath {$y$}}}
+\newcommand{\bY}{\mbox{\boldmath {$Y$}}}
+\newcommand{\bz}{\mbox{\boldmath {$z$}}}
+\newcommand{\bZ}{\mbox{\boldmath {$Z$}}}
+\newcommand{\bze}{\mbox{\boldmath {$0$}}}
+\newcommand{\bone}{\mbox{\boldmath {$1$}}}
+\newcommand{\bemptyset}{\mbox{\boldmath {$ \emptyset$}}}
+\newcommand{\bmu}{\mbox{\boldmath $ \mu $}}
+\newcommand{\bSig}{\mbox{\boldmath $ \Sigma $}}
+\newcommand{\bsig}{\mbox{\boldmath $ \sigma $}}
+\newcommand{\bSigma}{\mbox{\boldmath $ \Sigma $}}
+\newcommand{\bsigma}{\mbox{\boldmath $\sigma$}}
+\newcommand{\blam}{\mbox{\boldmath $ \lambda $}}
+\newcommand{\bLam}{\mbox{\boldmath $ \Lambda $}}
+\newcommand{\bbeta}{\mbox{\boldmath $ \beta $}}
+\newcommand{\brho}{\mbox{\boldmath $ \rho $}}
+\newcommand{\bome}{\mbox{\boldmath $ \omega $}}
+\newcommand{\bOme}{\mbox{\boldmath $ \Omega $}}
+\newcommand{\bGamma}{\mbox{\boldmath $\Gamma$}}
+\newcommand{\bGam}{\mbox{\boldmath $\Gamma$}}
+\newcommand{\bPhi}{\mbox{\boldmath $\Phi$}}
+\newcommand{\bUpsilon }{\mbox{\boldmath $\Upsilon $}}
+\newcommand{\bgamma}{\mbox{\boldmath $\gamma$}}
+\newcommand{\bthe}{\mbox{\boldmath $\theta$}}
+\newcommand{\bsthe}{\boldsymbol{\theta}}
+\newcommand{\bep}{\mbox{\boldmath $ \varepsilon $}}
+\newcommand{\bxi}{\mbox{\boldmath $ \xi $}}
+\newcommand{\bXi}{\mbox{\boldmath $ \Xi $}}
+\newcommand{\bsxi}{\boldsymbol{xi}}
+\newcommand{\bdel}{\mbox{\boldmath $ \delta $}}
+\newcommand{\bem   }{\mbox{\boldmath $ \emptyset  $}}
+\newcommand{\tr}{\mbox{tr}}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\supp}{\mathop{\rm sup}\limits}
+\newcommand{\E}{\mathbb{E}}
+\numberwithin{equation}{section}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{lem}{Lemma}
+\newtheorem{pro}{Proposition}[section]
+\newtheorem{rem}{Remark}
+
+\begin{document}
+\large
+
+\section{}
+\subsection{}訓練集合として，$N$個の観測地$x$を並べた${\bm x}:=(x_1,\cdots,x_n)^T $とそれぞれ対応する観測値$t$を並べた${\bm t}:= (t_1,\cdots,t_N)^N$が与えられたとする．そして目標データ集合${\bm t}$は，まず$\sin(2\pi x)$の関数値を作成したのち，ガウス分布に従う小さなランダムノイズを加えて対応する$t_n$を作った．すなわち
+$$t_n \sim sin(2\pi x_n) + \varepsilon \quad \varepsilon \sim N(0,\sigma^2)$$
+となるデータを作成している．このようにして生成されたデータは多くの現実データ集合の持つ性質をよく表している．すなわち，データはこれから学習しようとする規則性を保持してはいるが，それぞれの観測値はランダムノイズによって不正確なものになっている．このノイズは，放射性崩壊のように，本質的に確率的なランダムプロセスによる場合もあるが，多くはそれ自身は観測されない信号源の変動によるものである．\\
+
+我々の目標は，この訓練集合を利用して，新たな入力変数の値$\hat{x}$に対して$\hat{t}$の値を予測することである．後で見るように，これは背後にある関数$\sin (2\pi x)$を暗に見つけようとすることとほぼ等価であるが，有限個のデータ集合から汎化しなければならない点で，本質的に難しい問題である．さらに，観測データはノイズが乗っており，与えられた$\hat{x}$に対する$\hat t$の値には不確実性がある．1.2説では，そのような不確実性を厳密かつ定量的に評価する枠組みを与える．また1.5説で議論する決定理論は，確率論的な枠組みを利用して，適切な基準の下での最適な予測をすることを可能にする．\\
+
+ただしここでは話を先に進めるために，曲線フィッティングに基づく単純なアプローチを，あまり形式ばらない形で考えよう．ここでは特に，以下のような多項式を使ってデータへのフィッティングを行うことにする．
+\begin{equation}
+\begin{split}
+y(x,{\bw}) = w_0 + w_1x + w_2x^2 + \cdots + w_Mx^M = \sum_{j=0}^M w_j x^j
+\end{split}
+\end{equation}
+ただし，$M$は多項式の次数で，$x^j$は$x$の$j$乗を表す．多項式$y(x,{\bw})$は$x$の非線形関数であるものの，係数${\bw}$の線形関数であることに注意する．すなわち，相異なる$x_1,x_2$に対して
+$$y(x_1,{\bw}) + y(x_2,{\bw}) = y(x_1+x_2,{\bw})$$
+は常には成り立たないものの，相異なる${\bw}_1,{\bw}_2$に対しては
+\begin{align*}
+  y(x,{\bw}_1) + y(x,{\bw}_2) = y(x,{\bw}_1 + {\bw}_2)
+\end{align*}
+が成立する．多項式のように，未知のパラメータに関して線形であるような関数は非常に重要な性質を持つ．それらは線形モデルと呼ばれ，のちの章で詳細に議論する．\\
+訓練データに多項式を当てはめることで係数の値を求めてみよう．これは${\bw}$を任意に固定した時の関数$y(x,{\bw})$の値と訓練集合のデータ点との間のずれを測る誤差関数の最小化で達成できる．誤差関数の選び方として，単純で広く用いられているのは，各データ点$x_n$における予測値$y(x_n,{\bw})$と対応する目標値$t_n$との二乗和誤差
+\begin{align}
+  \label{gosa}
+E({\bw}) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,{\bw}) - t_n\}^2
+\end{align}
+となり，これを最小化することになる．のちにこの関数を選ぶ理由について議論するが，利点の1つは，これが微分可能な凸関数であることにある．また，上の関数が$0$となるのは$y(x,{\bw}_n)$が全訓練データを通るとき，かつその時に限ることに注意する．\\
+
+
+このように$E({\bw})$をできるだけ小さくするような$\bw$を選ぶことで曲線当てはめ問題を解くことができる．誤差関数は係数$\bw$の二次関数だから，その係数に関する微分は$\bw$の要素に関して線形になり，誤差関数を最小にするただ1つの解$\bw^{\star}$が
+$\varphi(x) := (x^0 ,x,x^2,\cdots,x^M)^T$
+として
+\begin{align*}
+\bw^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T \right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
+\end{align*}
+と閉じた形で求まる．実際$y(x,\bw) = \varphi(x)^T \bw$に注意して(\ref{gosa})式を${\bw}$で微分して$0$と置くと
+\begin{align*}
+\nabla E(\bw) &= \sum_{n=1}^N\varphi(x_n)\{\varphi(x)^T \bw-t_n\}\\
+                &= \sum_{n = 1}^N (\varphi(x_n)\varphi(x_n)^Tw - \varphi(x_n)^T t_n) = 0\\
+                \therefore \bw &= (\varphi(x_n) \varphi(x_n)^T)^{-1}(\varphi(x_n)t_n)
+\end{align*}
+が得られる．また，これより結果として得られる多項式は$y(x,\bw^{\star})$となる．\\
+
+あとは多項式の次数$M$を選ぶ問題が残っているが，この問題はモデル比較(モデル選択)と呼ぶ重要な概念の一例とみなすことができる．\\
+
+例に見る通り$M=0,1$の場合にはあまりデータへの当てはまりが良くない一方で，$M=3$の場合がこの中では$\sin(2\pi x)$にもっともよく当てはまっているように見える．しかし$M=9$にした場合，訓練データには非常によく当てはまっている(実際にこの多項式は全データを通っている)ものの曲線は無茶苦茶に発振したようになっており，関数$\sin(2\pi x)$の表現として明らかに不適切である．このような学習は過学習として知られている．\\
+
+我々の目標は新たなデータに対して正確な予測を行える高い汎化性能を達成することである．汎化性能が次数$M$にどう依存するかを定量的に評価するため，100個のデータ点からなる独立したテスト集合を，訓練データとまったく同じ方法で生成する．すると，選んだ$M$の各値について(\ref{gosa})式で与えられる$E(\bw^{\star})$の残渣が計算できるが，テスト集合についても$E(\bw^{\star})$を評価できる．このとき，
+\begin{equation}
+\begin{split}
+  E_{RMS}&=\sqrt{2E(\bw^{\star}/N)}\\
+          &= \sqrt{\frac{1}{N}\sum_{n=1}^N \{y(x_n,\bw^{\star}) - t_n\}^2}
+\end{split}
+\end{equation}
+で定義される平均二乗平方根誤差を用いると比較に便利なことがある．$N$で割ることによってサイズの異なるデータ集合を比較することができるようになり，平方根をとることによって$E_{RMS}$は目的変数$t$と同じ尺度であることが保障される．テスト集合の誤差は新たな$x$を観測した時に$t$をどれだけよく予測できたかを表している．例の通り，$M$が小さいと誤差が大きく，これは$\sin(2\pi x)$の振動をとらえることができないことを意味しており，$3\leq M\leq 8$では比較的誤差が小さく妥当な表現といえる．\\
+
+$M=9$では訓練集合の誤差は$0$になる．しかし関数$u(x,\bw^{\star})$の無茶苦茶な発振が起きるので，テスト集合の誤差は非常に大きくなる．$M=9$次の多項式が潜在的に$M=3$次の多項式を含むことを考えると，このことはパラドックスのように思えることもある．\\
+さらに新たなデータに対する最良な予測関数はデータを生成した関数$\sin (2\pi x)$であると考えることもできる．後にこのことを示す．関数$\sin (2\pi x)$の級数展開は区間$(0,1)$ですべての次数の項を含むことより，$M$を増やせば増やすほど単調に良い結果が得られると期待してしまう．\\
+
+いろいろな次数の多項式について得られた$\bw^{\star}$の値を検証してみると，$M$の増加に伴って係数の多くが大きな値をとるようになることがわかる．これにより訓練集合のデータ点にはピッタリ適合するものの，データ点とデータ点の間では大きな発振が起こってしまう．\\
+
+次にモデルの次数は固定し，データ集合のサイズを変えてみた時の振る舞いについて，モデルの複雑さを固定した時，データ集合のサイズが大きくなるにつれて過学習の問題は深刻ではなくなってくることがわかる．別な言い方をすると，データ集合を大きくすればするほど，より複雑で柔軟なモデルをデータにあてはめられるようになる．大雑把な経験則としては，データ点の数はモデル中の適応パラメータの数の何倍かよりは小さくてはならない，と言われている．しかし，3章で見るように，必ずしもパラメータの数がモデルの複雑さを測る最適な尺度というわけではない．\\
+
+また入手できる訓練集合のサイズに応じてモデルのパラメータの数を制限する必要があるのは納得できない感もする．モデルの複雑さはデータ点の個数ではなく，解くべき問題の複雑さに応じて選ぶのがもっともに思える．最小二乗でモデルのパラメータを求めるアプローチが最尤推定の特別な場合に相当し，過学習の問題が最尤推定の持つ一般的性質として理解できることを後で示す．\\
+
+過学習の問題を避けるにはベイズ的アプローチを採用すればよい．ベイズの観点からはモデルのパラメータ数がデータ点の数をはるかに超えても問題がないことが後にわかる．実際，ベイズモデルにおいては有効パラメータ数は自動的にデータ集合のサイズに適合する．\\
+
+ベイズ的アプローチ以外で，複雑で柔軟なモデルを限られたサイズのデータ集合に対して使うことができるかを考える．過学習の現象を制御するためによく使われる手法として正則化がある．これは誤差関数に罰金項を付加することにより係数が大きな値になることを防ごうとするものである．そのようなもので最も単純な誤差関数は
+\begin{align}
+  \label{ridge}
+\tilde E(\bw) = \frac{1}{2}\sum_{n=1}^N\{y(x_n,\bw)- t_n\}^2+\frac{\lambda}{2}\|w\|^2
+\end{align}
+である．ただし一般性を失うことなく$w_0 = 0$とすることができ，正則化からは外すことも多い．この場合も誤差関数(\ref*{ridge})式を最小にする解は
+\begin{align*}
+  \bw^{\star} = \left( \sum_{n=1}^N\varphi(x_n)\varphi(x_n)^T + \lambda I\right)^{-1}\left( \sum_{n=1}^N\varphi(x_n)^T t_n \right)
+  \end{align*}
+と閉じた形で求まる．このようなテクニックは統計学の分野で縮小推定と呼ばれており，特に2次の場合はリッジ回帰と呼ばれる．またニューラルネットワークの分野では荷重減衰として知られている．\\
+
+同じデータ集合に対し，$M=9$を当てはめた結果を見ると，過学習が抑制されて背後の$\sin (2\pi x)$にずっと近い表現が得られていることがわかる．しかしながら，$\lambda$を大きくし過ぎると当てはまりは再び悪くなる．\\
+
+モデルの複雑さに関する議論は1.3節で詳しく議論するが，ここでは単に誤差関数を最小にするようなアプローチで実際の応用問題を解こうとする際には，モデルの複雑さを適切に決める方法を見つけなければならないということを注意しておく．得られたデータを係数決定のための訓練集合と，テストのための確認用集合の2つに分けるという単純な方法が思いつくが，この方法では貴重な訓練データを無駄にすることになることが多く，より洗練されたアプローチを探す必要がある．\\
+
+\subsection{}
+確率の例を単純な例を使って導入する．赤と青の2つの箱があり，赤い箱にはリンゴ2個とオレンジ6個．青の箱にはリンゴ3個とオレンジ1個入っているとする．赤い箱を40\%,青の箱を60\%で選び，箱の中の果物は分け隔てなく同じ確からしさで選ぶ．\\
+この例ではどの箱を選ぶかを表すものが確率変数となり，今それを$B$で表すことにする．この変数は2つの可能な値，すなわち$r$(赤い箱)または$b$(青い箱)をとりうる．同様にどの果物かを表すのも確率変数であり，これを$F$で表すこれは$a$(リンゴ)か$o$(オレンジ)の値をとる．\\
+
+事象の確率を，その事象が起きた回数と全試行回数の比で定義する．ただし，全試行回数が無限に多くなった時の極限を考える．このとき
+$$p(B = r ) = \frac{4}{10},\quad p(B = b) = \frac{6}{10}$$
+
+となる．事象の集合が互いに排反で，すべての可能な場合を含んでいれば，それらの事象の確率の総和は1になることが要請される．\\
+
+このような状況で考えうる質問「リンゴを選び出す確率はいくらか」，「オレンジを選び出したとして，それが青い箱から取り出されたものである確率はいくつか」，あるいはパターン認識問題に関連したより込み入った質問にも答えるには，確率に関する2つの基本的な法則のみ知っていればよい．すなわち確率の加法定理と確率の乗法定理である．以下でこれらを導出することを考える．\\
+
+2つの確率変数$X,Y$は任意の値$x_i(i = 1,\cdots,M),y_i(i = 1,\cdots,L)$をそれぞれとれるものとする．$X,Y$の両方についてサンプルを取り，全部で$N$回の試行を行う．そのうち$X = x_i,Y = y_j$となる試行の数を$n_{ij}$とする．また$X$が値$x_i$を取る試行の数を$c_i$とし，同様に$Y$が$y_j$を取る試行の数を$r_j$とする．$X$が$x_i$，$Y$が$y_j$を取る確率を$p(X = x_i,Y = y_j)$と書き，$X = x_i$と$Y = y_j$の同時確率と呼ぶ．この場合は
+\begin{align}
+\label{zenjishou}
+p(X = x_i, Y = y_j) = \frac{n_{i,j}}{N}
+\end{align}
+で与えられる．同様に$X$が$c_i$を取る確率は
+\begin{align}
+\label{shuhen}
+p(X = x_i) = \frac{c_i}{N}
+\end{align}
+で与えられる．これは$c_i = \sum_{j}n_{ij}$であることを用いれば
+\begin{align}
+  p(X = x_i ) = \sum_{j=1 }^Lp(X = x_i,Y = y_j)
+\end{align}
+が成立する．これが確率の加法定理である．この場合，$p(X = x_i)$を周辺確率と呼ぶこともある．\\
+
+$X = x_i$の事例だけを考え，その中での$Y = y_j$の事例の比率を$p(Y = y_j\mid X = x_i)$と書き，$X = x_i$が与えられた下での$Y = y_j$の条件付き確率と呼ぶ．この場合は
+\begin{align}
+\label{jyouken}
+p(Y = y_j\mid X = x_i) = \frac{n_{ij}}{c_i}
+\end{align}
+となる．(\ref{zenjishou}),(\ref{shuhen}),(\ref{jyouken})式より次の関係を得る．
+\begin{equation}
+\begin{split}
+  p( X = x_i,Y = y_j) &=\frac{n_{ij}}{N}\\
+  &=\frac{n_{ij}}{c_i}\cdot \frac{c_i}{N}\\
+  &=p(Y = y_j\mid X = x_i)p(X = x_i)
+\end{split}
+\end{equation}
+これは確率の乗法定理である．\\
+まとめると，確率論の基本法則を以下のように書くことができる．
+\begin{align}
+\qquad & p(X) = \sum_Y p(X,Y)\\
+\qquad& p(X,Y) = p(Y\mid X)p(X)
+\end{align}
+
+乗法定理と対称性$p(X,Y) = p(Y,X)$より関係式
+\begin{align}
+p(Y\mid X) = \frac{p(X\mid Y)p(Y)}{p(X)}
+\end{align}
+を得る．これはベイズの定理と呼ばれ，パターン認識や機械学習において中心的な役割を果たす．また，上式の分母は
+\begin{align}
+p(X) = \sum_Y p(X\mid Y)p(Y)
+\end{align}
+と分子に現れる量を使って表すことができる．\\
+
+
+果物の箱の例に戻る．赤，青の箱を選ぶ確率はそれぞれ
+\begin{align}
+p(B = r) = 4/10\\
+p(B = b) = 6/10
+\end{align}
+
+選んだ箱が青い箱であった場合にリンゴを選ぶ確率は，単に青い箱の中のリンゴの個数の比率で$3/4$なので$p(F = a\mid B = b) = 3/4$である．実際に箱の種類が与えられた下での果物の条件付き確率をすべて書き出すと
+\begin{align}
+p(F = a\mid B = r) &= 1/4\\
+p(F = o\mid B = r) &= 3/4\\
+p(F = a\mid B = b) &= 3/4\\
+p(F = o\mid B = b) &= 1/4
+\end{align}
+となり，これらの確率はすべて規格化されていることが確認できる．
+\begin{align}
+p(F = a\mid B = r) + p(F = o\mid B = r) &= 1\\
+p(F = a\mid B = b) + p(F = o\mid B = b) &= 1
+\end{align}
+確率の加法定理，乗法定理を用いることでリンゴを選ぶ確率は
+\begin{equation}
+\begin{split}
+p(F = a)&=p(F = a\mid B = r)p(B = r) + p(F = o\mid B = r)p(B = r)\\
+&=\frac{1}{4} \times \frac{4}{10} + \frac{3}{4}\times \frac{6}{10} = \frac{11}{20}
+\end{split}
+\end{equation}
+となり，また加法定理から$p(F = o) =\displaystyle 1-\frac{11}{20} = \frac{9}{11}$がいえる．一方果物が与えられたもとでの条件付確率はベイズの定理より
+\begin{align}
+p(B = r\mid F = o) = \frac{p(F = o\mid B = r)p(B = r)}{p(F = o)} = \frac{3}{4}\times\frac{4}{10}\times \frac{20}{9}= \frac{2}{3}
+\end{align}
+となる．再び加法定理より$p(B = b\mid F = o) = 1-\frac{2}{3} = \frac{1}{3}$が言える．\\
+
+ベイズの定理において，どの箱を選んだかに関する確率は事前確率と呼ばれ，一旦果物がオレンジであると判明した後に得られる$p(B\mid F)$を事後確率と呼ぶ．\\
+また，2つの変数の同時分布がその周辺分布の積に分解できるとき，すなわち$p(X,Y) = p(X)p(Y)$となるとき，$X$と$Y$は独立であるという．このとき$p(Y\mid X) = P(Y)$であることが乗法定理より得られる．果物の例では各箱に同じ比率でリンゴとオレンジが入っていれば$p(F\mid B) = p(F)$となり，リンゴが選ばれる確率はどの箱が選ばれたかに独立になる．\\
+
+\subsubsection{}
+連続な確率変数についても議論を進めていく．実数値をとる変数$x$が区間$(x,x+\delta x)$に入る確率が$\delta x \to 0$のとき，関数$p(x)$によって$p(x)\delta x$で与えられるとき，$p(x)$を$x$上の確率密度関数と呼ぶ．このとき$x$が区間$(a,b)$にある確率は
+\begin{align}
+p(x\in(a,b)) = \int_a^b p(x)dx
+\end{align}
+で与えられる．確率は非負で$x$は実数値上のどこかを値をとる必要があるため，確率密度は以下の2つの条件を満たす必要がある
+\begin{align}
+p(x)&\geq 0\\
+\int_{-\infty}^{\infty}p(x)dx &= 1
+\end{align}
+変数に非線形な変換を施すと，確率変数はヤコビ行列により単純な関数とは異なる仕方で変換される．例えば，変数変換$x = g(y)$を考えると，関数$f(x)$は$\tilde f(y) = f(g(y))$となる．確率密度$p_x(x)$に対応する，新しい変数$y$に関する密度$p_y(y)$を考える．区間$(x,x+ \delta x)$に入る観測値$x'$に対応する観測値$y'$は，$\delta x$が小さければ区間$(y,y + \delta y)$に入り，$p_x(x)\delta x\simeq p_y(y)\delta y$となるから
+\begin{equation}
+\begin{split}
+p_y(y) &= p_x(x)\left|\frac{dx}{dy}\right|\\
+&=p_x(g(y))|g'(y)|
+\end{split}
+\end{equation}
+となる．これより確率密度の最大値は変数の選び方に依存することがわかる．\\
+
+$x$が区間$(-\infty,z)$に入る確率は累積分布関数
+\begin{align}
+P(z) = \int_{-\infty}^zp(x)dx
+\end{align}
+で定義され，これは$P'(x) = p(x)$を満たす．\\
+いくつかの連続変数$x_1,\cdots,x_D$があるとき，これをまとめてベクトル$\bf x$で表すと同時分布$p(\bf x) = p(x_1,\cdots,x_D)$を定義することができて，$\bf x$が$\bf x$を含む無限小の体積要素$\delta \bf x$に入る確率は$p(\bf x)\delta \bf x$で与えられる．この多変数確率密度は
+\begin{align}
+p(\bf x) & \geq 0\\
+\int p(\bf x)d {\bf x} &= 1
+\end{align}
+を満たす必要がある．また$x$が離散変数の時は$p(x)$は確率質量関数と呼ばれる．連続変数においても離散変数と同様に，確率の加法定理・乗法定理を用いることが可能で
+\begin{align}
+p(x) &= \int p(x,y) dy\\
+p(x,y) &= p(y\mid x)p(x)
+\end{align}
+の形をとる．\\
+
+\subsubsection{}
+確率を含むもっとも重要な操作の1つは重み付きの平均を求めることである．関数$f(x)$の，確率分布$p(x)$の下での平均値を$f(x)$の期待値と呼び，$\mathbb{E}[f]$と書く．離散分布に対しては
+\begin{align}
+\mathbb{E}[f] = \sum_{x}p(x)f(x)
+\end{align}
+で与えられ，連続変数の場合の期待値は
+\begin{align}
+\mathbb{E}[f] = \int p(x)f(x)dx
+\end{align}
+で与えられる．どちらの場合も確率分布や確率密度から得られた有限個の$N$点を用いて，期待値はこれらの値の有限和
+\begin{align}
+\mathbb{E}[f] \simeq \frac{1}{N}\sum_{n=1}^N f(x_n)
+\end{align}
+で近似できる．この近似は大数の法則より，$N\to\infty$で厳密になる．\\
+多変数関数の期待値を考えることもあるが，この場合には，どの変数について平均を取るのかを示すのに添え字を使う．例えば，
+\begin{align}
+\mathbb{E}_x[f(x,y)]
+\end{align}
+は関数$f(x,y)$の$x$の分布に関する平均を表す．$\mathbb{E}_x[f(x,y)]$は$y$の関数になることに注意する．\\
+条件付き分布についても条件付き期待値を考えることができ，
+\begin{align}
+\mathbb{E}_x[f\mid y] = \sum_{x}p(x\mid y)f(x)
+\end{align}
+となり，連続変数についても同様に定義できる．\\
+
+$f$の分散は
+\begin{align}
+\Var[f] = \mathbb{E}\left[(f(x) - \mathbb{E}[f(x)])^2\right]
+\end{align}
+と定義され，$f(x)$がその平均のまわりでどれくらいばらつくかの尺度になる．上式を展開すると
+\begin{equation}
+\begin{split}
+\Var[f] &= \mathbb{E}\left[(f(x))^2  - 2f(x) \mathbb{E}[f(x)] +\mathbb{E}[f(x)] ^2\right]\\
+&=\mathbb{E}[f(x)^2] - \mathbb{E}[f(x)] ^2
+\end{split}
+\end{equation}
+と書くこともできる．特に確率変数$x$自体の分散を考えることができ，
+\begin{align}
+\Var[x]  =\mathbb{E}[x^2] - \mathbb{E}[x]^2
+\end{align}
+となる．2つの確率変数$x,y$の間の共分散は
+\begin{equation}
+\begin{split}
+\cov[x,y]& = \E_{x,y}[\{x - \E[x]\}\{y - \E[y]\}]\\
+&= \E_{x,y}[xy] - \E[x]\E[y]
+\end{split}
+\end{equation}
+と定義され，$x$と$y$が同時に変動する度合いを表している．$x,y$が独立なら$p(x,y) = p(x)p(y)$となることより
+\begin{align*}
+\E[xy] &= \int xy p(x,y)dxdy\\
+&=\int xp(x)dx \int y p(y) dy= \E[x]\E[y]
+\end{align*}
+となり，共分散が$0$になる．\\
+2つの確率変数ベクトル$\bx,\by$に関して共分散は行列
+\begin{equation}
+\begin{split}
+\cov[\bf x,\bf y] &= \E_{\bf x,\bf y}[\{\bf x - \E[\bf x]\}\{\bf y^T - \E[\bf y^T]\}]\\
+&=\E_{\bf x,\bf y}[\bf x\bf y^T] - \E[\bf x]\E[\bf y^T]
+\end{split}
+\end{equation}
+となる．この行列の各成分は
+\begin{align*}
+  (\cov[{\bf x,\bf y}] )_{i,j} = \E[x_i y_j] - \E[x_i]\E[y_j]
+\end{align*}
+とかくことができ，特に$\bf y = \bf x$とすると
+\begin{align*}
+  (\cov[{\bf x,\bf x}] )_{i,j} = \E[x_i x_j] - \E[x_i]\E[x_j]
+\end{align*}
+となり，対角成分が分散を表す分散共分散行列となる．\\
+\subsubsection{}
+これまでは確率をランダムな繰り返し試行の頻度とみなしてきたが，ここではより一般的なベイズ的な見方を導入する．そこでは確率は不確実性の度合いを与える．1.1節の多項式曲線フィッティングの例を考える．観測される変数$t_n$にのるノイズに頻度主義的な確率の概念を当てはめることは妥当であろう．しかしながら，我々はモデルパラメータ$\bw$の適切な選び方に関する不確実性を取り扱い，そして定量化したい．ベイズ的な観点を採用すれば，$\bw$といったモデルパラメータの他，モデルそのものの選択に関する不確実性を表すのに確率論の道具が使えることを見ていこう．\\
+
+果物の箱の例では，果物の種類を観測することが，選ばれた箱が赤である確率を変える本質的な情報になっていた．そこでは観測されたデータで与えられた証拠を取り込むことで，事前確率を事後確率に変換できた．同様のアプローチは多項式曲線フィッティングにおけるパラメータの推論にも採用できる．データを観測する前にあらかじめ$\bw$に関する我々の仮説を事前確率分布$p(\bw)$の形で取り込んでおく．観測データ$\mathcal{D} = \{t_1,\cdots,t_N\}$の効果は，後に見るように$p(\mathcal{D}\mid \bw)$という条件付き確率で陽に表現される．ベイズの定理は
+\begin{align}
+  \label{bais}
+p(\bw \mid \mathcal{D}) = \frac{p(\mathcal{D}\mid \bw)p(\bw)}{P(\mathcal{D})}
+\end{align}
+という形をとり，$\mathcal{D}$を観測した事後に$\bw$に関する不確実性を事後分布$p(\bw \mid \mathcal{D})$の形で評価することを可能にする．\\
+右辺にある$p(\mathcal{D}\mid \bw)$は尤度関数と呼ばれ，パラメータベクトル$\bw$を固定したときに観測されたデータがどれくらい起こりやすいかを表している．尤度は$\bw$に関する確率分布では無いことに注意する．\\
+尤度の定義から，ベイズの定理は言葉でかけば
+\begin{align}
+  {\rm 事後確率}\propto {\rm 尤度}\times {\rm 事前確率}
+\end{align}
+となり，この式に現れる全ての値は$\bw$の関数とみなせる．(\ref{bais})式の分母は，左辺の事後分布が積分して1になることを保証する規格化定数である．実際(\ref{bais})式の両辺を$\bw$で微分することで
+\begin{equation}
+\begin{split}
+\int p(\bw \mid \mathcal{D})d\bw &= \int\frac{p(\mathcal{D}\mid \bw)p(\bw)}{P(\mathcal{D})}d\bw\\
+\Leftrightarrow \int p(\bw\mid \mathcal{D})p(\mathcal{D})d\bw &= \int p(\mathcal{D}\mid \bw)p(\bw)d\bw
+\end{split}
+\end{equation}
+となり，左辺は$p(\mathcal{D})$を表している．ベイズと頻度主義両方の考え方で，尤度関数$p(\mathcal{D}\mid \bw)$は重要な役割を果たす．しかしながら，それをどう使うかは2つのアプローチで根本的に異なる．頻度主義的な設定では$\bw$は固定したパラメータと考えられ，その値は何らかの推定量として定められ，この推定の誤差範囲は可能なデータ集合$\mathcal{D}$の分布を考慮して得られる．一方ベイズ的な見方ではただ1つのデータ集合$\mathcal{D}$があって，パラメータに用いる不確実性は$\bw$の確率分布として表される．\\
+
+頻度主義では最尤推定が広く用いられており，$\bw$は尤度関数を最大にする値である．これは観測されたデータ集合が，実際に観測される確率を最大にする$\bw$の値を選ぶことに相当する．機械学習の分野において，尤度の対数の符号を反転したものは誤差関数と呼ばれる．\\
+
+頻度主義で誤差範囲を決める1つのアプローチはブートストラップと呼ばれているもので，そこではデータ集合$\bX$から復元抽出を繰り返すことによって新たなデータ集合を作成し，異なるブートストラップデータ集合に対する予測の変動を見ることでパラメータ推定の統計的な精度を評価することができる．\\
+
+ベイズ的な視点の利点は事前知識を自然に入れられる点にある．3回のコイン投げで全て表が出た場合，最尤推定では表が出る確率は1になってしまうが，ベイズ的なアプローチを用いればそのように極端な結論を導くことが無い．
+ベイズアプローチに対する批判の1つに，事前分布の選び方によって結果が主観的になるというものがある．事前分布への依存を小さくするために無情報事前分布を用いることがあるが，これは異なるモデルを比較する際に困難が生じる．%%%%%どんな？
+また，悪い事前分布を選べば高い確率で悪い結果が得られてしまう．これらの問題は頻度主義的な評価方法によってある程度防ぐことができ，交差確認といったテクニックがモデル選択などの問題には有効に働く．\\
+
+\subsubsection{ガウス分布}
+本書の多くで頻繁に用いられるについて述べる．\\
+単一の実数値変数$x$に対し，ガウス分布は
+\begin{align}
+\label{gauss}
+\mathcal{N}(x\mid \mu,\sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac{1}{2\sigma^2}(x-\mu)^2\right\}
+\end{align}
+と定義され，2つのパラメータ，平均$\mu$と分散$\sigma^2$を持つ．分散の平方根$\sigma$は標準偏差と呼ばれ，分散の逆数は$\beta = \frac{1}{\sigma^2}$と書き，精度パラメータと呼ぶ．\\
+(\ref{gauss})式の形から，ガウス分布は
+\begin{align}
+\mathcal{N}(x\mid \mu,\sigma^2)>0
+\end{align}
+を満たすことがわかる．また，規格化されていることは$I := \displaystyle\int \exp\left\{-\frac{x^2}{2\sigma^2}\right\}dx$として
+
+
+\begin{equation}
+\begin{split}
+  \label{kikaku}
+  I^2 &= \int\int \exp\left\{-\frac{x^2}{2\sigma^2}-\frac{y^2}{2\sigma^2}\right\}dxdy\\
+  &=\int_0^{2\pi} \int_{0}^{\infty}\exp\left\{-\frac{r^2}{2\sigma^2}\right\}\cdot r drd\theta\quad (\because x = r\sin\theta,y = r\cos\theta\;{\rm の変換} )\\
+  &= 2\pi \int_0^{\infty}r \exp\left\{-\frac{r^2}{2\sigma^2}\right\}dr\\
+  &=\pi \int_0^{\infty}\exp\left\{-\frac{u}{2\sigma^2}\right\}du(r^2 = u\;{\rm の変換})\\
+  &=\pi\left[-2\sigma^2\exp\left(-\frac{u}{2\sigma^2}\right)\right]_0^{\infty}\\
+  &= 2\pi\sigma^2\\
+  \therefore I &= \sqrt{2\pi\sigma^2}\\
+  \therefore \int  &\frac{1}{(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac{1}{2\sigma^2}(x-\mu)^2\right\}dx = 1
+\end{split}
+\end{equation}
+となることより確認できる．また期待値は(\ref{kikaku})式の両辺を$\mu$で微分することで
+\begin{equation}
+\begin{split}
+-\frac{1}{\sigma^2}\int\frac{1}{\sqrt{2\pi\sigma^2}}(x-\mu)\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx &= 0\\
+\mu\int \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx &= \int x\cdot \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+\therefore \mu &= \int x\cdot \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx = \E[x]
+\end{split}
+\end{equation}
+となり，分散は(\ref{kikaku})式の両辺を$\sigma^2$で微分することで
+\begin{equation}
+\begin{split}
+\int \left\{-\frac{1}{2\sqrt{2\pi\sigma^2}}\cdot \frac{1}{\sigma^2}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\right. &  +\left. \frac{1}{\sqrt{2\pi \sigma^2}}\cdot \frac{(x-\mu)^2}{2\sigma^4}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\right\}dx = 0\\
+\frac{1}{2\sigma^2}& = \frac{1}{2\sigma^4}\int\frac{(x - \mu)^2}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right)dx\\
+\sigma^2 &= \int\frac{(x - \mu)^2}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right)dx
+\end{split}
+\end{equation}
+となることがわかる．さらに分布の最大値を与えるモード(最頻値)を考えると，(\ref{gauss})式を$x$で微分して$0$とおいた式を解いて
+\begin{align*}
+\frac{d}{dx}\mathcal{N}(x\mid \mu,\sigma^2) = -\frac{(x - \mu)}{\sigma^2\sqrt{2\pi \sigma^2}}\exp\left(-\frac{(x- \mu)^2}{2\sigma^2}\right) = 0\\
+\therefore x = \mu
+\end{align*}
+となることより期待値と一致することがわかる．\\
+
+
+\end{document}
+
