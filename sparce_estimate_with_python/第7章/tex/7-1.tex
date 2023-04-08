@@ -1,0 +1,94 @@
+\documentclass{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{breqn}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\usepackage{bm}
+%\newtheorem{Ex}{演習問題}
+%\newtheorem*{Ex*}{演習問題}
+\newtheoremstyle{mystyle}%   % スタイル名
+    {}%                      % 上部スペース
+    {}%                      % 下部スペース
+    {\normalfont}%           % 本文フォント
+    {}%                      % インデント量
+    {\bf}%                   % 見出しフォント
+    {}%                      % 見出し後の句読点, '.'
+    { }%                     % 見出し後のスペース, ' ' or \newline
+    {\underline{\thmname{#1}\thmnumber{#2}\thmnote{（#3）}}}%
+                             % 見出しの書式 (can be left empty, meaning `normal')
+\theoremstyle{mystyle} % スタイルの適用
+\newtheorem*{Def}{Def}
+\newtheorem*{theo}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{ex}{Example}
+\newtheorem*{col}{Corollary}
+\renewcommand{\footnotesize}{\normalsize}
+\usepackage{latexsym}
+\def\qed{\hfill$\Box$}
+
+
+\begin{document}
+\section*{主成分分析}
+\vspace{5cm}
+\large 以下，行列$X=(x_{i,j})\in \mathbb{R}^{N\times p}$は中心化されていると仮定する．すなわち，各$j=1,\cdots ,p$に対して
+\begin{align*}
+\sum_{i=1}^Nx_{i,j}=0
+\end{align*}
+であるとする．$\|v\|_2^2=1$のもとで，
+\begin{align}
+\label{shusei}
+\|Xv\|_2^2=v^TX^TXv
+\end{align}
+を最大にする$v$を$v_1$，(\ref{shusei})式を最大にして$v_1$と直交する$v$を$v_2,\cdots$というようにして正規直交系$V:=[v_1,\cdots,v_p]$を求める操作を主成分分析という．\\
+\vspace{7cm}
+
+まず各$v_j$が直交するという制約を除いて，$\|v\|_2^2=1$のもとで$\|Xv\|_2^2$を最大にする$v_j$について考えてみる．そのような$v_j$は
+$$L(v_j,\mu_j)=\|Xv_j\|_2^2-\mu_j(\|v_j\|_2^2-1)$$
+を最大にするので，上式を$v_j$で微分して$0$とおいた等式
+$$X^TXv_j-\mu_j v_j=0$$
+を満足する．上式を，$X$の標本共分散行列$\Sigma :=\frac{1}{N}X^TX$および$\lambda:=\frac{\mu_j}{N}$を用いて書き換えると
+$$\Sigma v_j = \lambda_j v_j$$
+と書くことができる．これより求める$v_j$は$\Sigma$の固有ベクトルで，$\lambda_j$は$v_j$が属する固有値になることがわかる．もし$\lambda_j$の中で重複度が2以上のものだある場合には，それらの固有ベクトルは直交するように選んでくる．$\Sigma$の固有値が全てことなる場合には，$v_1,\cdots,v_p$は自動的に直交することがいえる．\\
+\vspace*{5cm}
+
+実際には$v_1,\cdots,v_p$を全て用いることはなく，最初の$m$個のみを用いることになる．そして$X$の各行を$V_m:=[v_1,\cdots,v_m]$に射影した$Z:=XV_m$を得る．すなわち$p$次元の情報を$m$個の主成分$v_1,\cdots,v_m$の空間に射影して，$m$次元の$Z$で$p$次元の$X$を見ることになる．そのような次元の圧縮のための線形写像が，主成分分析である．\\
+\vspace*{3cm}
+
+主成分分析のスパースなアプローチにはいくつかあるので，それらを考察していく．まず非ゼロ要素の個数を制限する手法について，この場合は$t$を整数として，$\|v\|_0\leq t,\| v\|_2=1$のもとで
+$$v^TX^TXv-\lambda \|v\|_0$$
+を最大化するような定式化になる．しかしこの場合，目的関数が凸にはならない．\\
+
+また，$\|v\|_1\leq t(t>0)$の制約を持たせて，$\|v\|_2=1$のもとで
+\begin{equation}
+\label{l1}
+v^TX^TXv-\lambda \|v\|_1
+\end{equation}
+の最大化を図ろうとしても，目的関数は凸にならない．\\
+\vspace{5cm}
+
+そこで$u\in\mathbb{R}^N$として，$\|u\|_2=\|v\|_2=1$のもとで
+\begin{equation}
+\label{SCoT}
+u^TXv-\lambda\|v\|_1
+\end{equation}の最大化を図る定式化，SCoTLASS\footnote{Simplified Component Technique - LASSO}が提案された．(\ref{SCoT})式で得られる最適な$v$は，(\ref{l1})の最適解になっている．実際
+\begin{align}
+\label{rl}
+L:=-u^TXv+\lambda\|v\|_1+\frac{\mu}{2}(u^Tu-1)+\frac{\delta}{2}(v^Tv-1)
+\end{align}
+を$u$で偏微分して$0$とおくと
+\begin{align*}
+\frac{\partial L}{\partial u}=X v+\mu u=0
+\end{align*}
+となり，$\|u\|_2^2=1$であることから$\displaystyle u = \frac{Xv}{\|Xv\|_2}$となる．これを(\ref{rl})式に代入することで
+\begin{align}
+-\|Xv\|_2+\lambda\|v\|_1+\frac{\delta}{2}(v^Tv-1)
+\end{align}
+となる．
+
+
+
+
+
+
+\end{document}

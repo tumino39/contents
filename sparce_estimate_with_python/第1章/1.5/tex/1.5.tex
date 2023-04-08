@@ -1,0 +1,188 @@
+\documentclass{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{breqn}
+\usepackage{amsthm}
+\usepackage{ascmac}
+\theoremstyle{definition}
+\usepackage{bm}
+%\newtheorem{Ex}{演習問題}
+%\newtheorem*{Ex*}{演習問題}
+\newtheoremstyle{mystyle}%   % スタイル名
+    {}%                      % 上部スペース
+    {}%                      % 下部スペース
+    {\normalfont}%           % 本文フォント
+    {}%                      % インデント量
+    {\bf}%                   % 見出しフォント
+    {}%                      % 見出し後の句読点, '.'
+    { }%                     % 見出し後のスペース, ' ' or \newline
+    {\underline{\thmname{#1}\thmnumber{#2}\thmnote{（#3）}}}%
+                             % 見出しの書式 (can be left empty, meaning `normal')
+\theoremstyle{mystyle} % スタイルの適用
+\newtheorem*{Def}{Def}
+\newtheorem*{theo}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{ex}{Example}
+\newtheorem*{col}{Corollary}
+\renewcommand{\footnotesize}{\normalsize}
+\usepackage{latexsym}
+\def\qed{\hfill$\Box$}
+
+\begin{document}
+\large
+\section*{1.5}
+LassoとRidgeを比較して，$\lambda$が大きくなるにつれて各係数の絶対値が減少し，$0$に近づく点では同じである．しかし，Lassoでは$\lambda$の値がある一定以上になると各係数の値がちょうど$0$になり，その$0$になるタイミングが係数ごとに異なる．そのためLassoは変数選択に用いることができる．\\
+
+数学的な解析も行ってきたが，直感的な意味を幾何学的に把握してみよう．\\
+
+$p=2$とし，$X\in \mathbb{R}^{N\times p}$が$x_{i,1},x_{i,2}(i=1,\cdots,N)$の2列からなっているとする．もちろん中心化を仮定する．最小2乗法では，
+\begin{align*}
+S:=\sum_{i=1}^N (y_i-\beta_1 x_{i,1}-\beta_2 x_{i,2})^2
+\end{align*}
+を最小にする$\beta_1,\beta_2$を求めていた．それらを$\hat{\beta}=(\hat{\beta}_1,\hat{\beta}_2)$とおく．ここで，各$i$について$\hat{y}_i = x_{i,1}\hat{\beta}_1+x_{i,2}\hat{\beta}_2$とおくと，
+\begin{align*}
+\frac{\partial S}{\partial \beta_j}(\hat{\beta}) &= -2\sum_{i=1}^Nx_{i,j}(y_i-\hat{y_i})=0
+\end{align*}
+が$j=1,2$に対して成立していたことから
+\begin{align}
+\label{ichii}
+\sum_{i=1}^Nx_{i,1}(y_i-\hat{y_i})=\sum_{i=1}^Nx_{i,2}(y_i-\hat{y_i})=0
+\end{align}
+が成立することがわかる．また，任意の実数$\beta_1,\beta_2$に対して
+\begin{align}
+\label{nii}
+y_i-\beta_1x_{i,1}-\beta_2x_{i,2} = y_i-\hat{y}_i-(\beta_1-\hat{\beta}_1)x_{i,1}-(\beta_2-\hat{\beta}_2)x_{i,2}
+\end{align}
+が成立していることがわかるので，(\ref{ichii}),(\ref{nii})式より最小にすべき$S=\sum_{i=1}^N (y_i-\beta_1 x_{i,1}-\beta_2 x_{i,2})^2$が
+\begin{equation}
+\begin{split}
+\label{kei}
+S &= \sum_{i=1}^N( y_i-\hat{y}_i-(\beta_1-\hat{\beta}_1)x_{i,1}-(\beta_2-\hat{\beta}_2)x_{i,2})^2\\
+&=\sum_{i=1}^N\left\{(y_i-\hat{y}_i)^2+(\beta_1-\hat{\beta}_1)^2x_{i,1}^2+(\beta_2-\hat{\beta}_2)^2x_{i,2}^2\right.\\
+&\hspace{3cm} - \left.2(y_i-\hat{y}_i)(\beta_1-\hat{\beta}_1)x_{i,1}+2(\beta_1-\hat{\beta}_1)x_{i,1}(\beta_2-\hat{\beta}_2)x_{i,2}-2(\beta_2-\hat{\beta}_2)x_{i,2}y_i-\hat{y}_i\right\}\\
+&=(\beta_1-\hat{\beta}_1)^2\sum_{i=1}^Nx_{i,1}^2+2(\beta_1-\hat{\beta}_1)(\beta_2-\hat{\beta}_2)\sum_{i=1}^Nx_{i,1}x_{i,2}+(\beta_2-\hat{\beta}_2)^2\sum_{i=1}^N x_{i,2}^2+\sum_{i=1}^N (y_i-\hat{y}_i)^2
+\end{split}
+\end{equation}
+
+
+とかくことができる．上式において$(\beta_1,\beta_2)=(\hat{\beta}_1,\hat{\beta}_2)$とすればもちろん最小値$(= \sum_{i=1}^N (y_i-\hat{y}_i)^2)$が得られる．また，(\ref{kei})式で得られた式において，座標の変換と平行移動を用いることで$S$は楕円の式の標準系(の左辺)になっていることがわかる．\\
+
+ここで，Lasso，Ridgeのそれぞれがある実数$C,C'>0$を用いた制約条件$\beta_1^2+\beta_2^2\leq C,|\beta_1|+|\beta_2|\leq C'$の下での$S=S(\beta)$の最小化問題となっている．このことを以下で確認する；\\
+
+Ridgeの場合について考える．$C\geq0$を任意にとって固定し，$g(\beta_1,\beta_2)=\beta_1^2+\beta_2^2-C$とおく．このとき$g(\beta)\leq 0$の下での$S(\beta)$の最小化問題の解$\beta^{\ast}$について考察にする．\\
+
+
+上のステートメントを具体的にかくと
+$$\min\; S(\beta_1,\beta_2)=\sum_{i=1}^N (y_i-\beta_1 x_{i,1}-\beta_2 x_{i,2})^2\;s.t.\; (\beta_1,\beta_2)\in A:=\{(\beta_1,\beta_2)\mid g(x_1,x_2)\leq0\}$$
+となる．ここで，
+\begin{align*}
+A'& :=\{(\beta_1,\beta_2)\mid g(x_1,x_2)=0\}\\
+A''& :=\{(\beta_1,\beta_2)\mid g(x_1,x_2)<0\}
+\end{align*}
+とおき，$\beta^{\ast}\in A',A''$のそれぞれで場合分けして考える．\\
+\begin{description}
+\item[$\beta^{\ast}\in A''$のとき]\mbox{}\\
+$g(\beta^{\ast})<0$であったとする．このとき，$g$の連続性より$\beta^{\ast}$を中心とするある開距離球体$B(\beta^{\ast},\varepsilon)$が存在して
+\begin{align}
+\label{bukiichi}
+\beta\in B(\beta^{\ast},\varepsilon)\Rightarrow g(\beta)<0
+\end{align}
+が成立することがわかる．さらに$\beta^{\ast}$は制約付き最小化問題の解であることから
+\begin{align}
+\label{bukini}
+\beta\in B(\beta^{\ast},\varepsilon)\Rightarrow S(\beta)\geq S(\beta^{\ast})
+\end{align}
+が成立することがわかる．したがってこのとき(\ref{bukiichi}),(\ref{bukini})式より，$\beta^{\ast}$は$S$の極値であることがわかり，$S$の凸性よりこの場合は$\beta^{\ast}$が制約なしの最小化問題の解であることがわかる．\\
+
+\item[$\beta^{\ast}\in A'$のとき]\mbox{}\\
+$g(\beta^{\ast})=0$であったとする．このとき$\beta^{\ast}$は特に$g(\beta)=0$の下での条件付き極値問題の解であったことより，
+\begin{enumerate}[(1)]
+\item $\beta^{\ast}$は$g$の特異点である．\\
+
+\item ある実数$\lambda$が存在し，$L_{\lambda}(\beta):=S(\beta)+\lambda g(\beta)$としたときに
+$$\frac{\partial }{\partial \beta_1}L_{\lambda}(\beta^{\ast})=\frac{\partial }{\partial \beta_2}L_{\lambda}(\beta^{\ast})=0$$
+\end{enumerate}
+のいずれかが成立することがわかる．曲線$g(\beta)=0$は特異点を持たないことよりこの場合は(2)が成立していることがわかる．\\
+
+また$\lambda$の正負について考えると，$\delta\in \mathbb{R}^2$を
+$$\nabla g(\beta^{\ast})^T \delta=\frac{\partial g}{\partial \beta_1}(\beta^{\ast})\delta_1+\frac{\partial g}{\partial \beta_2}(\beta^{\ast})\delta_2<0$$
+となるようにとると，平均値の定理より十分小さい$\varepsilon>0$に対して
+\begin{align*}
+g(\beta^{\ast}+\varepsilon \delta)&=g(\beta^{\ast})+\varepsilon\nabla g(\beta^{\ast})^T \delta<0
+\end{align*}
+が成立するので$\beta^{\ast}\in A$がわかる．これと$\beta^{\ast}$が制約付き最小化問題の解であること，およびテーラーの定理よりある$c\in(0,1)$が存在して
+\begin{align*}
+S(\beta^{\ast})&\leq S(\beta^{\ast}+\varepsilon \delta)\\
+&=S(\beta^{\ast})+\nabla S(\beta^{\ast}+c\varepsilon \delta)^T(\varepsilon \delta)\\
+\therefore 0&\leq \varepsilon \nabla S(\beta^{\ast}+c\varepsilon \delta)^T\delta	
+\end{align*}
+が成立することがわかる．したがって$\varepsilon\to +0$とすることで$0\leq \nabla S(\beta^{\ast})^T\delta$がわかるので，これと条件(2)より
+\begin{align*}
+\langle \nabla S(\beta^{\ast})+\lambda \nabla g(\beta^{\ast}),\delta\rangle &= \nabla S(\beta^{\ast})^T\delta+\lambda \nabla g(\beta^{\ast})\delta=0\\
+\therefore \nabla S(\beta^{\ast})^T\delta&=-\lambda \nabla g(\beta^{\ast})\delta\\
+\therefore \lambda&\geq 0
+\end{align*}
+がわかる．以上より，制約$g(\beta)\leq 0$の下での$S(\beta)$の最小化問題の解$\beta^{\ast}$は
+\begin{align*}
+\frac{\partial (S+\lambda g)}{\partial \beta}(\beta^{\ast})&=0\\
+\lambda&\geq 0
+\end{align*}
+を満たすことがわかり，$g(\beta)=\|\beta\|_2^2-C$であったことから
+$$L:=\sum_{i=1}^N(y_i-\beta_1x_{i,1}-\beta_2 x_{i,2})^2+\lambda\|\beta\|_2^2$$
+としたときに
+\begin{align*}
+\frac{\partial L}{\partial \beta}=\frac{\partial (S+\lambda g)}{\partial \beta}(\beta^{\ast})=0
+\end{align*}
+となることがわかる．よって$\beta^{\ast}$は$L$の制約条件なしの最小解となることがわかる．\\
+\end{description}
+また，ラグランジュの未定乗数法における乗数$\lambda$は
+$$\lambda=-\frac{\partial S}{\partial \beta_2}(\beta^{\ast})/\frac{\partial g}{\partial  \beta_2}(\beta^{\ast})$$
+とおけることから，$C$が小さくなるにつれて$\lambda$は大きくなる．\qed\\
+
+
+
+図1.8の緑の範囲に最小二乗法の解$(\hat{\beta}_1,\hat{\beta}_2)$がくれば$\beta_1=0$または$\beta_2=0$がLassoの解となる．特に楕円が円である場合の証明を考えよう．
+\begin{proof}
+$S$を変形した(\ref{kei})式が$\displaystyle \sum_{i=1}^N x_{i,1}^2=\sum_{i=1}^N x_{i,2}^2=1,\sum_{i=1}^N x_{i,1}x_{i,2}=0$を満たしているとする．このとき
+$$S(\beta_1,\beta_2)=(\beta_1-\hat{\beta}_1)^2+(\beta_2-\hat{\beta}_2)^2+\sum_{i=1}^N (y_i-\hat{y}_i)^2$$
+とかくことができる．$T$を大きくしていきながら$S(\beta_1,\beta_2)=T$を満たす$(\beta_1,\beta_2)$の領域を考え，$D:=\{(\beta_1,\beta_2)\mid |\beta_1|+|\beta_2|<C\}$と$S(\beta_1,\beta_2)=T$を満たす領域とが初めて空でなくなったとき，接点$(\beta_1',\beta_2')$は
+\begin{align*}
+\|(\beta_1',\beta_2')-(\hat{\beta}_1,\hat{\beta}_2)\|_2&=\inf_{\beta \in D}\|\beta-(\hat{\beta}_1,\hat{\beta}_2)\|_2=\|D-(\hat{\beta}_1,\hat{\beta}_2)\|_2
+\end{align*}
+を満たすことがわかる．そのような点$(\beta_1',\beta_2')$は，白の領域上では制約条件の直線上になり，緑の領域上では制約条件の特異点となることがわかり，したがって$\beta_1=0$または$\beta_2=0$がLassoの解となる．\\
+\end{proof}
+
+そして，見逃すことができないRidgeのメリットとして共線性がある．つまり，説明変数に類似する列が存在した場合に首尾よく動作することである．このことについて考察しよう．\\
+
+与えられたデータ$X\in\mathbb{R}^{N\times p}$と，そこから定まる回帰方程式による推定値$\hat{y}\in \mathbb{R}^N$，および実際に観測される値$y\in\mathbb{R}^N$に対し，決定係数$R$の2乗$R^2$は
+\begin{align*}
+R^2: =1-\frac{\displaystyle \sum_{i=1}^N(y_i-\hat{y}_i)^2}{\displaystyle \sum_{i=1}^N(y_i-\bar{y}_i)^2}
+\end{align*}
+で定義され，この値が大きいほど実現値と推定値の相対的な差が小さいことを表す．また，$j$番目のデータに対して$VIF_j$を，$X=({\bm x}_1,\cdots,{\bm x}_{j-1},{\bm x}_{j+1},\cdots,{\bm x}_p),y={\bm x}_j$として
+$$VIF_j =\frac{1}{1-R^2}=\frac{\displaystyle \sum_{i=1}^N(y_i-\bar{y}_i)^2}{\displaystyle \sum_{i=1}^N(y_i-\hat{y}_i)^2}$$
+で定義する．この値が大きいほど$j$列目の成分は他の列の成分で表されることを意味する．\\
+通常の線形回帰では，$VIF$の値が大きくなるような$j$が存在すると，推定された$\hat{\beta}$の値が不安定になり，特に2列が完全に一致するときは${\rm rank}(X^TX)$が正則でなくなるので推定値が求まらない．またLassoの場合，2列が類似しているときは一方の係数が$0$，他方の係数が非ゼロとして推定されることが多い．しかしRidgeの場合，$\lambda>0$であれば$X$の列$j,k$が一致するときでも推定値が求まり，両者が一致するという性質がある．証明は教科書を読めばすぐに理解できる．\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

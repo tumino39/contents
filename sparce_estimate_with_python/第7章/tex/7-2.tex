@@ -1,0 +1,144 @@
+\documentclass{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{breqn}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\usepackage{bm}
+%\newtheorem{Ex}{演習問題}
+%\newtheorem*{Ex*}{演習問題}
+\newtheoremstyle{mystyle}%   % スタイル名
+    {}%                      % 上部スペース
+    {}%                      % 下部スペース
+    {\normalfont}%           % 本文フォント
+    {}%                      % インデント量
+    {\bf}%                   % 見出しフォント
+    {}%                      % 見出し後の句読点, '.'
+    { }%                     % 見出し後のスペース, ' ' or \newline
+    {\underline{\thmname{#1}\thmnumber{#2}\thmnote{（#3）}}}%
+                             % 見出しの書式 (can be left empty, meaning `normal')
+\theoremstyle{mystyle} % スタイルの適用
+\newtheorem*{Def}{Def}
+\newtheorem*{theo}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{ex}{Example}
+\newtheorem*{col}{Corollary}
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\renewcommand{\footnotesize}{\normalsize}
+\usepackage{latexsym}
+\def\qed{\hfill$\Box$}
+\begin{document}
+
+
+\large   第1主成分だけでなく第$m$主成分までの最適化をはかる場合，
+\begin{align}
+\label{tachi}
+    L:=\frac{1}{N}\sum_{i=1}^N\|x_i -x_iV_mU_m^T\|_2^2 +\lambda_1\sum_{j=1}^m\|v_j\|_1
+            +\lambda_2\sum_{j=1}^m\|v_j\|_2 + \mu\sum_{j=1}^m (\mu_j^T\mu_j -1)
+\end{align}
+の最小化を考えることになる．ここで，
+$$V_m U_m^T = \sum_{j=1}^m v_ju_j^T$$
+であることから(\ref{tachi})式はp214(7.10)式第1項の$vu^T$を第$m$項までの和として拡張し，各$v_i$に正則化を施したものと見ることができる．教科書では直交条件$u_ju_k^T=0$が含まれていないが、この条件を含めた定式化ができる．\\
+
+(\ref{tachi})式に直交条件を加えた最小化は
+\begin{equation}
+    \min_{u,v}\left\{\frac{1}{N}\sum_{i=1}^N\|x_i - x_i V_m U_m^T \|_2^2+\lambda_{1}\sum_{j=1}^m\|v_j\|_1 +\lambda_{2}\sum_{j=1}^m\|v_j\|_2^2\right\}\quad \text{ subject to}\; U_m^T U_m = I_p
+\end{equation}
+となる．ただし$I_p$は$p$次単位ベクトルとした．上式は双凸であるものの凸ではないので，$U_m,V_m$が与えられたときにそれぞれ$V_m,U_m$を求めるアルゴリズムを考える．\\
+
+\subsection*{$U_m$が与えられたとき}
+最小化の式は
+\begin{align*}
+    \frac{1}{N}\sum_{i=1}^N \|x_i - x_i V_m U_m^T\|_2^2+\lambda_{1}\sum_{j=1}^m\|v_j\|_1 +\lambda_{2}\sum_{j=1}^m\|v_j\|_2^2
+\end{align*}
+と書くことができ，上式第1項は凸関数であることより上式全体はelastic netの定式化
+となっている．したがって，座標降下法により効率的な最小化が図れる．\\
+
+\subsection*{$V_m$が与えられたとき}
+最小化の式は
+\begin{align}
+\label{pro}
+    \frac{1}{N}\sum_{i=1}^N \|x_i - x_i V_m U_m^T\|_2^2\quad \text{subject to}\;U_m^T U_m = I_p
+\end{align}
+と書くことができる．この定式化はプロクルステス問題に書きかえることができ，その書きかえの元で最小化を求める．//
+
+(\ref{pro})式は
+\begin{equation}
+\tag*{(3)'} 
+\label{pro2}
+\frac{1}{N}\|X-XV_mU_m^T\|_F^2\quad \text{subject to}\;U_m^T U_m = I_p
+\end{equation}
+と書き換えることができる．ここで，$\|・\|_F$は行列のフロベニウスノルム，すなわち行列$A=(A)_{i,j}$に対して
+$$\|A\|_F=\sqrt{\sum_{i,j}(A)_{i,j}}$$
+で定義されるノルムである．また，同じサイズの行列$A,B$に対して，その内積を   
+\begin{align*}
+    \langle A,B  \rangle:= {\rm tr}(A B^T)
+\end{align*}
+によって定義する．この定義はwell-definedであり，さらにこの内積から誘導されるノルムは
+\begin{align*}
+   \langle A,A \rangle={\rm tr}(A A^T)={\rm tr}(A^T A)=\|A\|_F^2
+\end{align*}
+よりフロベニウスノルムであることがわかる．\\
+
+以上の準備のもと，条件式の最小化について変形していくと
+\begin{equation}
+\begin{split}
+\label{pro3}
+\argmin_{U_m}\|X-XV_mU_m^T\|_F^2&=\argmin_{U_m}\langle X-XV_mU_m^T,X-XV_mU_m^T \rangle\\
+&=\argmin_{U_m}\left\{\|X\|_F^2+\|XV_mU_m\|_F^2-2\langle X, XV_mU_m^T \rangle
+\right\}\\
+&=\argmin_{U_m}\left\{\|XV_mU_m^T\|_F^2-2\langle X, XV_mU_m^T \rangle
+\right\}
+\end{split}
+\end{equation}
+となり，
+\begin{align*}
+\|XV_mU_m\|_F^2&={\rm tr}\{XV_mU_m^T(XV_mU_m^T)^T\}\\
+&={\rm tr}(XV_mU_m^TU_mV_m^TX^T)\\
+&={\rm tr }(XV_m(XV_m)^T)=\|XV_m\|_F^2\quad (\because U_m^TU_m = I_p)
+\end{align*}
+であることから$\|XV_mU_m\|_F^2$は$U_m$に依存しないことがわかる．したがって(\ref{pro2})式は
+\begin{align*}
+\argmax_{U_m}\langle X, XV_mU_m^T \rangle
+\end{align*}
+となることがわかる．さらに変形を進めていくと
+
+
+\begin{equation}
+\begin{split}
+\argmax_{U_m}\langle X, XV_mU_m^T \rangle&=\argmax_{U_m}{\rm tr}(X(XV_mU_m^T )^T)\\
+&=\argmax_{U_m}{\rm tr}(XU_m V_m^T X^T)\\
+&=\argmax_{U_m}{\rm tr}(U_m V_m^T X^TX)
+\end{split}
+\end{equation}
+となり，$V_m^TX^TX$の特異値分解を$V_m^TX^TX=A\Sigma B^T\; (A\in\mathbb{R}^{m\times m},\Sigma \in\mathbb{R}^{m\times p},B\in\mathbb{R}^{p\times p})$とすると上式は
+\begin{align*}
+\argmax_{U_m}{\rm tr}( U_m A\Sigma B^T)&=\argmax_{U_m}{\rm tr}(B^TU_m A\Sigma)
+\end{align*}
+とかくことができる．ここで$Z:=B^TU_m A$とおくと，
+\begin{align*}
+Z^TZ &= (B^TU_m A)^TB^TU_m A\\
+&=A^TU_m^TBB^TU_m =I_{m}
+\end{align*}
+であること，すなわち$Z$の各列はノルム1かつ直交していることがわかる．したがって${\rm tr}(Z\Sigma)$が最大となるには，$Z$の各$i$列が標準単位ベクトルになることが要請される．\\
+
+以上より求める$U_m$は
+\begin{align*}
+Z = B^TU_m A&=P_m\\
+\therefore U_m &= B P_m A^T
+\end{align*}
+と求められることがわかる．\qed\\
+
+
+
+SCotLASSと共に，SPCAは目的関数が共に凸ではないが双凸である．さらにSPCAにはelastic net のアルゴリズムを適用でき，かつ複数成分を一度に求められるといった利点がある．
+
+
+\end{document}
+
+
+
+
+
+\end{document}
