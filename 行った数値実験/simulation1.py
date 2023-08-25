@@ -43,7 +43,6 @@ for dim in range(6):
 
         box_conv[it,dim] = np.abs(np.dot(vec1[:,0],vec2[:,0]))
         box_sph[it,dim] = np.abs(np.dot(vec1[:,0],vec3[:,0]))
-        print('finish'+ str(dim) + '-' + str(it))
 
 plt.plot(np.arange(5,11),box_conv.mean(axis = 0),c = "b",marker = ".",label = "PCA")
 plt.plot(np.arange(5,11),box_sph.mean(axis = 0),c = "r",marker = ".",label = "SPCA")
