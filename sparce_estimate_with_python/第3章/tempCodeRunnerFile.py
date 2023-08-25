@@ -1,1 +1,0 @@
-giants_2019.txt
